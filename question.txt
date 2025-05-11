@@ -1,0 +1,278 @@
+1)what is docker
+2. how containers are different from virtual machines?
+3. what is docker image lifecycle
+4. what are docker components?
+5. what is difference between docker copy and docker add?
+6.what are the networking types in docker and what is the default?
+7.can you explain how to isolate networking between the containers?
+8. what is docker volume?
+9.you have a docker container running a web server,but you need to update the application code inside it.how would you approach this task?
+10.your team is deploying a microservice architrcture using docker containers.how would you orchestrate and manage these containers effectively?
+11.trobleshot in contaniner
+12)your team need to share data between multiple docker containers.how would you accomplish this while mainataing isolation between container?
+13) security of docker container
+14) how do you stay up-to-date with the latest devops trends and technologies?
+15) how quickly can you learn?7) day to day activities on kubernetes?
+16) can you architect an application and how quickly can you do it?
+17) what are the some problems that you have faced while working on project?
+18)what is the command to change the ownership and permission of a file or directory in linux?
+19) how do you manage and view running processes in linux?
+20)what is ssh?
+21)how to check memory stats and cpu stats as a linux admin?
+22)what is cronjob?
+23)what is a alias in linux?
+24)what is dns and how does it works?
+25)what is nat? why you use?
+26) difference between tcp and udp?
+27)what are the 7 layers in osi model.
+28)what is firewall?
+29)what is ping command?
+30)what is ifconfig command?
+31)what is git and how do we use it in devops?
+32)explain the workflow of how you push your code from a local machine?
+33)how do you revert a commit that you made in your repo?
+34)what is branch in repo?
+35)what is vpc?
+36)what is differnce between public subnet and private subnet?
+37) what is differnce between reserved instance and spot instance?
+38)what is cloudformation?
+39) what is differnce between terraform and ansible and when you use it?
+40) what is a playbook in ansible?
+41) what is terraform remote state backend?
+42) differnce between virtualization and containerization?
+43)what problems are docker solved? why compnies are use it?
+44)what is cicd?
+45)explain staging,production and testing enviornment?
+46)explain canary deployment?
+47)what is the biggest issue you faced during a deployment?
+48)how do you scale your application?
+49)how do you roll back? what is your dister recovery strategy?
+50) what is connection draining?
+
+51)  what is difference between docker and kubernetes?
+52)  what are the main components of kubernetes architecture?
+53)  what is the differnce between docker container and a kubernetes pod?
+54)  what is ssh port forwording?
+55)  what is zombie process?
+56)  what is k8s service what are the type of service?
+57)  how do you handle k8s cluster security?
+58)  you have an application deployed on k8s that is experencing increased traffic,how would you scale the application to handle the increased load?
+59)  while troubleshooting a networking issue in the cluster,you noticed kube-proxy in the logs.what is the role of kube-proxy in cluster?
+60)  your team is planning a high availablity kubernetes cluster.describe the process and consideration for desiging and high availibity k8s cluster.
+61)  what happens when the master or the worker node fails?
+62)  how does ingress help in k8s?
+63)  what do you know about headless service?
+64) what is init container, why we need?
+65) critical application running on one of the node is not working properly.how do you monitor application in k8s?
+66) your manager read an artical on gitops and want you to do POC on it. what is gitops and how do you impliment?
+67) explain RBAC
+68) how do you perform maintainance on the k8s node?
+69) explain daemonset in k8s
+70) differnce between configmap and secrets?
+71) what is purpuse of oprators?
+72) how can you run a pod on specific node?
+73) suppose a pod exceed its memory limit. what signal will be sent to the process?
+74) what will you do to upgrade k8s cluster?
+75) kubernetes imagepull policy
+76) company is migrating its monolithics application to a micro-service architecture on kubernetes. how would you plan and excute this migration?
+77) you have a stateful application that requires persistent storage in k8s. how would you configure persistent storage for this application?
+78) you're experiencing performace issue with your k8s cluster. how would you diagnose and resolve these issue?
+79) you need to deploy a k8s application across multiple environment (dev,staging,production) with different configuration. how would you manage enviornment specific configuration in k8s?
+80) your team want to impliment rolling updates for a k8s deployment to minimize downtime during application upgrades. how would you achieve this?
+81)What is IAM?
+82)Authentication and authorization.
+83)what is ec2?
+84)instance type
+85)what is EBS?
+86)Auto-scaling group
+87)Load-balancer
+88)Appliation load balancer.
+89)network load balncer.
+90)fedrated identity
+91)what is cloud computing
+92)what is encryption and its type.
+93)how do you manage encryption in aws?
+94)differnce between cilent side encryption and server side encryption.
+95)what is vpc and what are the componants?
+96)what vpc peering and how do you manage?
+97)what is cidr
+98)explain the architecture of vpc
+99)explain cloud models
+100)how to connect private instance without using key?
+101)how do you troubleshot instance when you cant ssh into the instance?
+102)what is transit gateway and how 
+it creates?
+103)what is cloudwatch? why we need it?
+104)what is alarm in cloud watch?
+105)what is terraform?
+106)i have git client in my system and i forgot my password, so how i update my password?
+107)what is differnce between ubuntu and centos?
+108)differnce between wget and curl command?
+109)how to check free space in linux?
+110)what is quality profile sonar?
+111)what to do when my code quality gate fail?
+112)what is master and slave in jenkins?
+113)suppose my master node running 10 job and suddenly my master node goes down, are the job still run?
+114)write jenkins pipe declarative
+115)what will happen when two stages have same name?
+116)what happen when first stage is failed in pipeline, can next stages will run?
+117)how do you configure when you want if first stage is failed but you want remaing job must be run
+118)what plugins you used for jenkins?
+119)i have 2 job, when triger 1 job that should be triger another job how should you configure?
+120)you have 2 pipeline. one pipeline exected successfully after that another pipelin should run how to configure that?
+121)in your project where you used ansible?
+122)i want to copy file from one server to another, how do you do it?in ansible
+123)What is Jenkins, and what is its primary purpose in the software development process?
+124)Describe the master-slave architecture in Jenkins and its advantages
+125)Explain the role of Jenkins plugins and provide examples of popular plugins
+126)What are the common issues or challenges you might encounter while using Jenkins, and how can you troubleshoot them?
+127)Explain Kubernetes' role in self-healing and how it handles container failures.
+128)What are Kubernetes ConfigMaps and Secrets, and how do they differ in terms of storing configuration data?
+129)How would you upgrade a Kubernetes cluster to a new version while minimizing downtime?
+130)What is a Helm chart, and how does it simplify application deployment on Kubernetes?
+131)How do you monitor a Kubernetes cluster and its workloads? Mention some popular monitoring and logging solutions for Kubernetes.
+132)Explain Kubernetes RBAC (Role-Based Access Control) and how you would configure it to secure your cluster.
+133)Describe the concept of "Immutable Infrastructure" and how it relates to Kubernetes.
+134)How do you handle secrets rotation for applications running in Kubernetes, and why is it important?
+135)Discuss the challenges and best practices for running stateful applications in Kubernetes, such as databases.
+#136)Share an example of a complex Kubernetes project you've worked on, highlighting the challenges you faced and how you overcame them.
+137)How do you deploy a containerized application on a Kubernetes cluster? Walk me through the process.
+138)Describe Kubernetes Deployments and StatefulSets. What are the differences, and when would you use one over the other?
+139)How does Kubernetes handle load balancing for containerized applications?
+140)What is a Kubernetes Namespace, and why would you use multiple namespaces in a cluster?
+141)Explain the concept of Kubernetes Services and how they enable network connectivity for Pods.
+142)What is the role of a Kubernetes Ingress controller, and how does it work?
+143)What is Kubernetes' role in auto-scaling, and how can you set up Horizontal Pod Autoscaling (HPA)?	
+144)You are responsible for deploying a microservices-based application on Kubernetes. How would you design the architecture to ensure high availability, scalability, and fault tolerance for the application?
+145)Your team has developed a new version of an application that you need to roll out to a Kubernetes cluster without affecting the existing users. Describe the strategy and steps you would take to perform a zero-downtime deployment
+146)You have a stateful application, such as a database, running in Kubernetes. Explain how you would ensure data persistence and manage backups effectively.  
+#147)Your organization uses multiple Kubernetes clusters across different cloud providers and on-premises data centers. How would you implement a multi-cluster strategy to manage and orchestrate containers seamlessly across all clusters?
+148)One of your Pods is experiencing high resource utilization and affecting other Pods on the same node. How would you diagnose and address this issue, ensuring resource isolation?
+150)You want to enable secure communication between services in your Kubernetes cluster. Describe how you would configure and manage network policies for pod-to-pod communication.
+151)You have a stateless application with variable traffic patterns. How would you configure Horizontal Pod Autoscaling (HPA) to automatically scale the application based on resource utilization?
+151)Your organization is adopting GitOps for managing Kubernetes configurations. Describe the GitOps workflow and the tools you would use to implement it.
+152)You need to migrate an existing monolithic application to a microservices architecture running on Kubernetes. How would you plan and execute this migration while minimizing disruptions?
+153)Your Kubernetes cluster is running out of resources, and you need to optimize resource utilization. Explain the steps you would take to right-size and optimize resource allocation for your workloads.
+154)You are tasked with setting up a disaster recovery plan for your Kubernetes cluster. Describe the strategies and tools you would use to ensure data and application availability in the event of a cluster failure.
+155)You want to implement RBAC (Role-Based Access Control) in your Kubernetes cluster. Explain how you would define roles, role bindings, and service accounts to secure your cluster.
+#156)Your team is adopting a hybrid cloud strategy, using both on-premises and cloud-based Kubernetes clusters. How would you ensure consistency and compatibility between these clusters?
+157)You are troubleshooting a performance issue in a Kubernetes cluster. Walk me through the steps you would take to identify the root cause and optimize the cluster's performance.
+What is Docker, and how does it differ from traditional virtualization?
+    Explain the key components of Docker's architecture.
+    What are Docker containers, and how do they work?
+    How do you create a Docker image? Can you explain the Dockerfile and its significance?
+    What is the difference between an image and a container in Docker?
+    What is Docker Compose, and how does it simplify multi-container application orchestration?
+    Describe the Docker networking modes and how containers communicate with each other.
+    How do you manage data persistence in Docker containers?
+    Explain the concept of Docker volumes and when you would use them.
+    How do you secure Docker containers and images? Can you mention some best practices for container security?
+    Explain the concept of multistage Dockerfile caching and how it impacts the build process.
+    Entrypoint vs CMD?
+    How to performance optimized lightweight Docker container?
+Your team is concerned about security in the Docker environment. Describe the security best practices you would implement to safeguard against potential vulnerabilities and threats.
+    You are migrating an existing application to a new host that has Docker installed. How would you transfer and deploy the application using Docker to minimize downtime and ensure a smooth transition?
+    You have been tasked with implementing a blue-green deployment strategy for a Dockerized application. Explain the steps involved in this process and how it ensures minimal downtime during updates.
+    You are responsible for monitoring a fleet of Docker containers in a production environment. What tools and practices would you use to monitor container health, resource usage, and performance?
+	
+
+What is Jenkins, and what is its primary purpose in the software development process?
+    Explain the difference between Jenkins and other continuous integration/continuous delivery (CI/CD) tools.
+    What are Jenkins pipelines, and why are they important?
+    Describe the master-slave architecture in Jenkins and its advantages.
+    Explain the role of Jenkins plugins and provide examples of popular plugins
+    What is the purpose of Jenkins agents or nodes, and how do you configure them?
+    Explain the concept of "Blue-Green Deployment" and how Jenkins can be used to implement it.
+    What are the common issues or challenges you might encounter while using Jenkins, and how can you troubleshoot them?
+    How to troubleshoot Jenkins if any issues are encountered?
+
+  Scenario:
+    You have a Java web application codebase hosted on GitHub. How would you set up a Jenkins job to build and deploy this application automatically whenever changes are pushed to the master branch?
+    You notice that your Jenkins server is running slow, and jobs are taking longer to execute. How would you diagnose and resolve performance issues in Jenkins?
+    You are tasked with implementing a CI/CD pipeline for a microservices-based application. Each microservice has its own repository in Git. How would you structure the Jenkins pipeline to build, test, and deploy these microservices independently yet cohesively?
+    One of your Jenkins jobs failed during the build process, and you need to investigate the issue. Walk me through the steps you would take to identify the root cause of the failure and fix it.
+    Your team uses Docker containers for application deployment. Explain how you would integrate Jenkins with Docker to automate the containerization and deployment of your applications.
+    You want to implement a deployment strategy that allows you to roll back to the previous version of the application in case of issues with the current release. How would you set up a Jenkins pipeline to achieve this, considering best practices for deployment?
+    Your company is adopting Infrastructure as Code (IaC) using tools like Terraform. How can you incorporate Terraform scripts into your Jenkins pipeline to automate the provisioning of infrastructure alongside application deployment?
+    Your team is developing a mobile application for iOS and Android. How would you configure Jenkins to build and test the app for both platforms, considering the differences in build and testing tools?
+    Your team is considering migrating from a traditional Jenkins setup to Jenkins Pipelines (Jenkinsfile). Explain the benefits of using Jenkins Pipelines and the steps you would take to migrate existing jobs.
+
+
+what is the role of api gateway in serverless
+	it is like a bridge between your end user where your request will be triggered, they will call an endpoint, then it will be a calling a backend server.
+
+are they any limitation of using api gateway, or any limitation to using serverless?
+
+disadvantages of sereverless?
+ 	
+
+1) Tell me about yourself..
+Ans - "My name is ABC, and I am a software engineer with over 8 years of experience in the tech industry. In my current role at XYZ Company, I am responsible for developing and testing new software products and have led several successful projects from inception to completion. My key skills include programming in Python and Java, project management, and team leadership. I am excited to apply my experience and skills to the open software engineer position at your company and help drive innovation and growth."
+  
+2) What is your Notice Period?
+Ans - "I have already resigned and currently serving my notice period."
+
+3) Why did you resign without any offer?
+Ans - "I'm confident that I'll secure a job within one month."
+
+4) Do you have all the documents of previous company ?
+Ans - "Yes, I have necessary documents: salary slip, offer letter, hike/increment letter, and the resignation email confirmation of my last working day."
+
+5) What is current CTC fixed and variable?
+Ans - "My salary was fixed, and I have both PF (Provident Fund) and UAN (Universal Account Number) numbers. PF contributions were deducted directly from my salary.I have bank statements showing the salary credited to my account."
+
+6) What is your expected salary?
+Ans -  "As per company policy..."
+
+7) Why you want to work for our company?
+Ans - "I feel that with my current skill sets and my experience in the XYZ domain, the job requirements this role presented are a perfect match for me. I could visualize myself in that role as it aligned with my career aspirations, skills, and expertise. Besides, I have researched your company and found that it has impressive and promising projections which made me excited to be a part of the amazing future. I would take pride in working under the great leadership of this company and I found this place to be a perfect fit for utilizing my expertise along with the promising aspect of personal growth"
+
+8) What are your greatest strengths and weaknesses?
+Ans - Some tips to answer this question:
+
+Be honest.
+Start by stating the strongest skills and qualities that can be of a great match to the job role.
+Be ready with the backup claim for each of the strengths that you mention. Hence, avoid speaking of the strengths that you do not possess.
+Do not tell any weakness that can potentially jeopardize your candidature.
+Do not mention more than 2 weaknesses and always mention how you are working on improving them.
+Do not tell cheesy, cliché answers like “I am a perfectionist which is both my strength and my weakness”.
+
+Sample answer:
+"I think one of my greatest strengths is that I am a great team player. I am also a self-motivated and quick learning individual. Whatever task that I set to do, I always give my best and complete it diligently well in advance. My weakness would be that I am learning to master people skills while meeting new individuals. I get nervous while talking to new people. I have been working on this for quite a long time and I can say with utmost confidence that I have come a long way."
+
+9) Why are you looking for a change?
+Ans - "I have been with my current company for several years, and while I have gained valuable experience, I am seeking new challenges and opportunities for growth that align with my long-term career goals.Your company's innovative projects and commitment to professional development caught my attention, and I believe it's the right time for me to make a transition and contribute my skills in a new environment."
+
+10) Why should we hire you?
+Ans - "I am a self-motivated and very open-minded person who can learn very fast. Looking at the job description and my experience in the field of web development, I am confident that I am very much suitable for this role. I enjoy solving problems and I am a great team player. I also believe that my values are aligned with this company’s values. I think this position will support my interest and also give me interesting and exciting opportunities to contribute to the growth of this organization. I am very much excited about this opportunity."
+
+11) Where do you see yourself in next 5 years?
+Ans - "After 5 years, I would like to see myself in a leading position with more knowledge, skills, and as one of the responsible people in the company. I will use these years to gain more knowledge and experience so that I can reach the position I want to be in. I will contribute my entire skills to develop the company and simultaneously gain knowledge from the company.
+
+
+
+
+ How can you troubleshoot issues related to Auto Scaling, such as instances not launching or scaling events not triggering as expected?
+What strategies can you use to minimize costs while using Auto Scaling effectively?
+Explain how you would handle Auto Scaling for applications with varying workloads throughout the day (e.g., a news website with peak traffic times).
+What are the best practices for setting up Auto Scaling for stateful and stateless applications?      
+How do you configure triggers and alarms for Auto Scaling policies using Amazon CloudWatch? 
+Explain how scaling policies work in Auto Scaling. What are the different types of scaling policies?
+What is difference between Launch Template and Launch configuration?
+ What is the difference between horizontal and vertical scaling, and how does Auto Scaling facilitate horizontal scaling?
+Explain the primary components of AWS Auto Scaling.
+How to changes instance types for running application without downtime of application?
+  What is a target group in the context of ALB, and how is it used for routing traffic to instances?
+  When would you choose an Application Load Balancer (ALB) over a Network Load Balancer (NLB), and vice versa?
+  What are the best practices for encrypting EBS volumes at rest, and how do you implement encryption?
+ What is an EBS snapshot, and why is it important for data durability and disaster recovery?
+ How do you resize an EBS volume, and what precautions should be taken when doing so?
+What is Amazon Elastic Block Store (EBS), and how does it differ from Amazon S3?
+Explain the limitations or constraints of AWS Placement Groups?
+What are some best practices for using Placement Groups in AWS?
+
+
+
+
+
+
