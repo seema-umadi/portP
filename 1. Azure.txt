@@ -1,0 +1,136 @@
+1. what is azure virtual network?
+	azure virtual network enables you to build, deploy and manage application in cloud environment. it provide other features like load balancing, vpn connection, firewall. it is like our own private isolated space within azure cloud. 
+
+2. why should i use azure virtual network?
+	azure virtual network provide all the necessary componate for creating and managing vpn for your application. its perfect for remote and disconnected enviornments because it will allow you to securly connect your application over the internet, regardless of where its located. this type of solution is particularly useful when your managing multiple applications across different geographical location. 
+	steps to create vnet= navigate to virtual networ-> start->choose subscribtion where you want to the vnet resides. -> select an resourse group or create one -> define vnet basis unique name for vnet-> choose the region where you want to deploy vnet-> define cidr block for vnet -> define subnets -> optionally configure security by enabling ddos protection and decide if you want to add firewall-> review and create.
+
+3.name some scenarios that you can accomplish with a virtual network?
+	1.communication with azure resources with the internet. 2. communication between azure resources. 3. communication with on-primises resources. 4.filtering network traffic, routing network traffic.
+
+4.what are inbound and outbound connection
+	inbound= incoming traffic on your url or ip address. outbound= traffic leaving your load balancer which will be going out on a specific url or ip address.
+
+5. what is azure subnet?
+	azure subnet provide network isolation, enabling you to create a virtual network that is logically isolated from other virtual network in the same region. public subnets are available on a first come, first serverd basis and should be used for workload that does not require any additional security configuration such as firewalls or access control lists. private subnets offer an additional layer of security by separating traffic between resources based on need-to-know criteria. a hybrid model provides customers with the benefits of both public and private modeles.       
+
+6. what is azure vnet peering?
+	Azure vnet peering is a way for virtual networks in different regions to communicate with each other. when you create a vnet in one region and want it to be able to communicate with another region's vnet. you can setup the vnets for peering.this is useful if you have workloads that need continues access from the on-premises network and the public internet, but you dont want to setup a vpn connection between your two data centers.
+
+7. storage
+	1. disk storage= it allow you to choose storage from either hdd or ssd as your storage with virtual machine.
+	2. blob storage= it is used for massive amount of unstructured data, that can be plain text or binary.
+	3. file storage= it is managed file storage that can be accessed via industry smb (server message protocol)
+	4. queqe storage= it is used for stable message queing for large workload. this service can be accessed from anywhere in the world.  
+
+8. why use azure	
+	azure is cost-efficient cloud platform, which provide many services to provision infrastructure, integrating pipeline, disaster recovry scaliabilty availiblity, many of it industry uses microsoft azure.
+
+9. what is resource group?
+	resource group is like a container that holds related resource for an azure solution. resources can be virtual machine, virtual network, storage accounts, databases, webapps. all resources within resource group share same lifecycle, meaning they can be deployed, managed or deleted together. you can apply access control or rbac to resource group that define who can manage resources within it. while resource group itself have a specific region, and resource can be in different region, for latency and its often best to keep group and resources in same region.
+
+
+10.complete vnet setup
+	1)create resource group by navigate to resource group-> create-> name->subscription-> region. 
+	2)create vnet-> resource group-> subscription-> name -> region ->enable encryption if needed -> enable azure bastion-> provide name for bastian ->create ip address->basic/standard -> enable firewall -> name firewall -> tier basic/standard/premium -> policy-> create policy-> name-> define vnet cidr -> there are alreday created subnets are present default subnet(where you can deploy your application) 2nd is bastion subnet 3rd is firewall subnet 4th firewall management->create.
+	3) create virtual machine in default subnet-> resource group should be the same-> name-> region->az-> image(ubuntu) ->vm architecture-> size(like instance type)->authentication type(ssh/password)-> generate new key pair-> select inbound port->storage-> networking-> select vnet-> default subnet ->public ip (none)to isolate subnet ->enable delete NIC when vm is deleted.-> custom data field or user data field for scripting -> create -> you will get notification for download key. here our instance has no public ip address. using bastion ssh into instance. on vm there is option called connect->bastion->authentication type-> ssh private key from local file->provide username-> pem file upload->connect. serach for firewall-> click on created firewall-> click firewall policy -> dnat rule -> add rule collection -> name->pripority(least no. 100 to 6553)-> rules(source is public ip address of those who need to access the application, destination will be the public ip of firewall )->add. 
+	3)if you need more subnet, create subnet and provide name and cidr-> attach network security group to each subnet as needed to manage inbound outbound traffic-> if needed create custom route and associate subnet with it -> define rules in network security group and attach to subnets ->use application security to group similar resources eg web server, apply security at application level. 
+
+
+
+
+compute pricing
+subscription
+firewall management subnet
+shared key
+vpn type=point to site,vnet to vnet, site to site
+gateway type
+custom routing
+bgp
+express route steps
+policy in vnet= define how should firewall behave, eg we use azure policy to allow some user that allow my personal laptop to access this vm or application i.e deployed on vm, if you are trying to access from anothers laptop you will not able to access. this things we are defined in policy
+ddos= it is basically denial of service, if there is a hacker trying to sends milion of request to your vm just make sure you vm is blocked or just to make sure your auto-scaling does not work properly 
+redundency type=1)LRS(locally redundant storage),Azure storage always stores multiple copies of your data so that its protected for planned or unplanned event like natural disater, power outage, hardware failure. created 3 replica automatically, data is stored in single region and in three different racks with lowest cost.
+2)zrs(zone redundance storage)= data is stored in three different az in the primary region. each az is sparate physical location. provide high availiblity and cost is more compared to lrs
+********************************************************************* VIRTUAL NETWORK ***********************************************************************************
+1)what is Virtual Network?
+	Azure virtual network enable you to build, deploy and manage application in cloud environment. it provide a private space for our application within cloud environment. virtual network provide all the necessary componate like load balancing, firewall, vnet peering, vpn connection. using virtual network we securly communicate with internet. it also enable communication between azure resoures, communication between on-premise.
+
+2)How to create VNet?
+	to create vnet navigate to virtual network-> create-> provide resource group->provide subscription-> name -> region -> enable encryption if needed -> enable bastion-> name -> create public ip address -> enable firewall -> name -> firewall policy -> define vnet cidr -> 4 subnets are already created one is default, second is bastion, third is firewall and fourth is firewall management. create. this is how vnet is going to create. we deploy our application on default subnet by disabling ip address. we connect to subnet via bastion subnet using bastion public ip. for that we need to go on vm -> there is option called connect-> bastion -> authentication type-> ssh -> username -> upload private key-> connect. 
+
+3)what is subnet ? how to create Subnet?
+	subnet provide logical isolation to our application or vm within cloud. also isolated from other virtual network.it is a range within vnet's cidr. we can create multiple subnets in single vnet. there are 3 type of subnet, public,private and hybrid. public subnet are those which have public ip associate with it. and we deploy those application which need users intraction like web application. private subnet are those which don't have public ip.this are complete isolate, private subnet are used for databases where user intraction is not need. hybrid is mixture of both public and private. 
+	navigate to vnet->click on subnet->create subnet->name -> cidr -> attach network security group at subnet level-> if needed cretae custom rote tables->if needed attach asg i.e application security group for application level security, for eg web server. 
+
+4)vnet peering
+	vnet peering is something that allow 2 vnet in same or cross region as well as in differnt account communicate with each other. because vnet are completely isolated from other vnet, in that case vent peering we can use. there are three type of peering. 1) private vnet peering is highly avaliable application which cant tolaret latentency or packet loss.it provide private connectivty between azures multiple regions without route hops 2) transit vnet peering is also for highly avaible application which cannot tolreat latenency and packet loss. it provide secure connectivty between multiple regions with route hops. 3)hybrid peering is communication between on primise infra as well as azure resources.
+	steps=create 2 vnet and subnets-> deploy two vm on differnt vnet -> enable public ip of 1st vm and disable ip address of 2nd vm-> connect 1st vm via ssh-> go to first vnet-> peering->name->virtual remote network-> name of vnet 2-> add. now ssh through vm1 by excuting command like ssh username@ipaddr(vm2).
+
+5)vpn connection.(site to site)
+	create vnet. create virtual network gatway->resource group-> subscription->region -> gateway type-> vpn-> vpn type-> route based ->virtual network name->public ip create one/use existing-> name the public ip->az-> create->. go to created virtual network gateway -> setting -> connection->add-> name -> connection type ->site to site -> create local network gateway (for on primise)-> name ->ip of on-primise-> on-premise vnet cidr-> search for connection-> connection type-> subscription -> resource group ->region-> setting -> choose virtual network gateway->local gatway->connection name->shared key->go to created connection->download configuration -> use that file to set up on-premises.
+
+
+6)route= Azure automatically creates a route table for each subnet within an azure virtual network and adds system deafult route table to the table. Azure routes outbound traffic from a subnet based on the routes in a subnets route table.
+vm->networking-> network interface->efective route->
+
+7) Express Route= express route is a service used to private connection between on-primise to microsoft cloud, it gives ability to bypass public internet, provide high speed with minimal latency.
+
+8)What is Azure Front Door? 
+	azure front door is a service that allow you to create web page for ur site and host them in cloud. this service is allow you to link your domain name, upload content and publish it from one location. if someone visit to your domain it will redirect to web page of front door. 
+
+************************************************************************virtual machine ****************************************************************************************************
+
+what is virtual machine?how to create?
+	virtual machines are digital representation of physical servers like computing, storage, database, memory. it lies on physical server and on the top of hyperviser. azure virtual machine gives you the flexiblity of virtualization without having to buy and maintain the physical hardware that runs it. but still you need to maintain the virtual machine by performing task such as configuring,patching and installing the software that run on it.
+	to create virtual machine-> navigate to virtual machine->create-> resource group-> subscription -> name -> region ->az->security type->image os-> size->administrator account -> authentication type (password/ssh key)->generate key->disk->networking->vnet->subnet->create public ip->inbound port->create.	
+
+capture vm
+	navigate to vm->capture tab-> resource group -> subscription -> options share image to a azure compute galary or capyure only managed image-> if gallary selected -> provide galary details like gallary name-> os state like generalised or specialised, if generalised selected while using image azure ask for username password if specialised select does not ask for username password.-> image defination-> image name -> ok->version details->replication ->create. vm will be stoped at this point of time.
+
+*************************************************************************** storage ********************************************************************************************************
+what is storage
+	a service is used to store files,messeges,tables or any type of data.provide durabilty(very less chance to data loss), secure(provide encryption), scalable(maximum capacity 500tb)manage data with multiple storage account.there are three categary. 1)storage for vm=disk and file share.2)unstructure data=blobs and data lake store 3)structured=tables,cosmos db, azure sql DB	
+
+create storage account
+	storage account-> subscription->resource group->name(uniqe)->region->performance standard(magnetic harddisk)/premium(ssd, used with vm)->account kind->replication->
+	
+	
+************************************************************************ App service *******************************************************************************************************
+
+what is App service 
+	App service is a microsoft azure PASS offering to host application.you can devlop app in any langugae. it is a managed service where microsoft azure take care of hosting enviornment such as security, laod balancing, auto-scaling an automated management. app service automatically patches and maintain the os and language framework. devloper can focus on his work of development without coming about the hosting enviornment.it is pay as you go service, you pay for the compute resource which you have used
+
+in app service there are two hosting environment within app service, one is app service plan and other is app service enviornment. app service environment is more suffesticated version of app service plane. app service enviornment provide more features compared to app service plan within this we host application like web application, web job, batches, API's and mobile backed service which is cosumed by mobile front end. other related service are related to app service plan, those related service is notification hub used to push notification to mobile device. there is another service which is more important i.e api management. it is like a wrapper to api application when we are exposing api to outside world.it come with lot of features like throtling and security.
+	steps to create app service-> create-> resource group->subscription-> name(uniq)->publish(code,docker container,static web) 
+->if code selected runtime stack->os ->region->plan depend on os(linux/window)-> create plan->name SKU size->select any env(dev/test, production,isolated)->type of pricing tier-> if primimum type selected then zone redundancy option we can see. ->create
+->if docker selected->os->region->docker-> image source (dockerhub,private registry, azure container registry,quickstart)-> access type(public/private. if private provide username password)->image->ok ->plan according to os-> name->size-> price tiering option.
+	once we create app service we can scale up or down vm count on created app service by clicking option scale down. we upgrade our app service plan by selecting scaleup option 
+app service. you will recieve one url click on that. now open connect with vm via ssh, install azure cli git clone the repo, after run a command "az webapp deployment source config-local-git --name (name of app service) --resource-group (name of resource group)" you will recieve url as a output. you need to create crendencial before deploying exec command "az webapp deployment list-publishing-credentials --name app service name resource-group name". after excuting command you will get an output in json format , you can see publishingusername and password. "git remote add azure and paste  url which is shown in json output with single quote" then "git push azure main" go to web page and refresh it you will see your application. also you can do this all with a single command for creating resource group and pushing code to azure with just a single command, ggo back to the terminal go to the folder where you have cloned the code, "az webapp up --name (give a any name with -quick because its quicker)--html "
+	you can deploy ur code while creating app service as well by provideing github details
+
+categories of pricing tier
+	1. shared compute 
+
+Azure notification hub=
+	notification hub->create->subscription->resource group->namespace(uniqe)-> give as name for notification hub->location->create. after creating go to notification hub namespace select the namespace you have created , you can create another hub as well. click on name space you can see multiple platform like apple,windows,google, window phone, amazon. for eg select apple
+	
+azure backup(for automatic backup needs pricing tier standard or premium,you will see option called backup on app service which you have creted. automatic backups are take backup in every one hour, you can restore your backup, restore option is present there as well->back up details->source/automatic backup/custom backup->if select automatic->backup time provide->choose destination->app service->) for custum backup configuration required ,
+	create web app-> backup-> configure custom backup->subscription-> storage account->create account->create container-> set schedule ->rentation-> keep backup file for 30 days-> create
+
+azure security= 1) encrypt data at rest and in-flight by enableing encryption while creating resources, ddos is also present, use encryption keys 2) restrict access to your resourse and databases,you can use firewall which block ip address that are not allowd, wrap your resources in virtual network and use privet connect to access other services. close port like ssh and rdp on vm's use azure bastion instead to securely connect to it, because of bastion you dont need to expose vm ip to outside world. 3) protect your application secretes, use azure key vault to store credential it is a centralised place to store.this contain key and certification. you can access this credential through azure managment service identity 4) use seprate subscription for production env, also use rbac policy to manage access to azure resources. 5) web application firewall implement application gateway or front door. use azure security center which suggest security best practices.
+
+9778600394 kochi hr
+
+k8s version
+jenkins version
+docker
+
+nugettoolinstaller
+nugetcommand
+
+organization name must be unqie
+once selected region can not be changed
+
+public projects are visible to everyone. no login is required to get access of public project. each public project has a uniqe url. public projects are mostly used for open source project. we can create unlimited no. of public projects under one or more organization. 
+private projects are visible to limited users. user must login into azure devops to access project. each private project has a unique url. private projects are mostly used for non public software devlopment
