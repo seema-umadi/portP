@@ -1,0 +1,181 @@
+projects:
+
+overview: build a CI/CD pipeline using jenkins, maven, docker and the EKS. when developer make any changes code and push it to git repo then it will trigger the ci job of the jenkins.which will pull the code from the application repository and it will build and test the artifacts using maven.then we will do the static code analysis of the artifacts using sonarqube. then we will build docker image and we will push that docker imges to the docker hub. after that we will scan the docker image using trivy scan.here our CI job completed. once it completed CD job will automatically get trigger.our cd job will first update the build number or release number in the deployment yaml file on the git ops repo on the github and then argoCD will pull the manifest file, updated file from git repo it will deploy the resources on the EKS cluster. and once our CD job is finished it will send the notification over the slack or email.
+
+here are the steps:
+
+- Install and Configure the Jenkins-Master and Jenkins-Agent
+- Integrate Maven to Jenkins and Add GitHub Credentials to Jenkins
+- Create Pipeline Script(Jenkinsfile) for Build & Test Artifacts and Create CI Job on Jenkins
+- Install and Configure the SonarQube
+- Integrate SonarQube with Jenkins
+- Build and Push Docker Image using Pipeline Script
+- Setup Bootstrap Server for eksctl and Setup Kubernetes using eksctl
+- ArgoCD Installation on EKS Cluster and Add EKS Cluster to ArgoCD
+-  Configure ArgoCD to Deploy Pods on EKS and Automate ArgoCD Deployment Job using GitOps GitHub Repository
+- DONE - Verify CI/CD Pipeline by Doing Test Commit on GitHub Application Repo.
+
+netflix clone:
+ deployed Netflix clone Application as a docker container on Kubernetes cluster through a secure CICD pipeline using Jenkins, the popular CICD tool. along with jenkins i also use many other devops tools like Docker, sonarqube,trivy, prometheus grafana and argocd and helm for kubernetes deployment.
+
+- Deploy Application on Docker container
+- setup sonarqube and trivy
+- install jenkis and setup cicd pipeline
+- install prometheus grafana to setup monitoring
+- setup email notification
+- create kubernetes cluster
+- install prometheus and node exporter using helm
+- install argocd and deploy the application
+
+
+
+
+1) how do you stay up-to-date with the latest devops trends and technologies?
+	i regularly follow devops blogs and i read them on medium and hashnode, i attend conferences in my city and i also subscribe to different news letters or take devops cources online to stay up to date in the devops community.
+
+2) how quickly can you learn?
+	I am very fast learner i can adapt new tool and technology very fast within few weeks. if given a chance i'll show them to you.
+
+3) can you architect an application and how quickly can you do it?
+	yes i can architect an application and the time would depend on the complexity of application. if it is simpler one i can do it in one day and if it complex then it takes me week to devlop it.
+
+4) what are the some problems that you have faced while working on project?
+	we were deploying our application we underestimated infrastructure capacity which cost performace issue but then we learned importance of capacity provisioning, low testing whenevr deploying application.
+
+5)have you used any linux flavers if yes which one?
+	yes i used most the ubuntu after that centos and amazon linux.
+
+6)what is the command to change the ownership and permission of a file or directory in linux?
+	we use chown command to change ownership(chown username filename), and chmod to chnage permission of file or directory(chmod permission file name)
+
+7) how do you manage and view running processes in linux?
+	i use ps command to list processes and top to view real-time system stats.
+
+8)what is ssh?
+	ssh is a secure shell, is a secure way to remotely connect to and control linux computers over the internet. it keeps you data safe through encryption and authentication.
+ssh -i keyname username@host
+
+9)how to check memory stats and cpu stats as a linux admin?
+	use free command to check memory and top command for cpu stats.
+
+10)what is cronjob?
+	a cronjob is a scheduled task in unix-like operating system.it allows you to automate repetitive task by specifying when and how often they should run.
+minute hour date month day
+
+11)what is a alias in linux?
+	alias is custom shorthand for lager command.it help save time and reduce typing error. alias ll='l'
+
+12)what is dns and how does it works?
+	dns is a system that translates human-readble domain name into ip address
+
+13)what is nat? why you use?
+	nat stands for network address translation. databases are in privates subnets are using nat to expose databases to the internet. so that no one from the internet can directly talk to the database but they have to talk to the nat first. this is how nat secure the server or the databases in the private subnets. 
+
+14) difference between tcp and udp?
+	tcp is used when information is very imp and you dont wanna loose any packets of information. udp is used when you make sure that the information has to be transferd even thogh it is complete or not.use cases of tcp is=file transfer,web browsing or emails. and use case of udp is=real time video streaming,online gaming. a simple example we can take whenever we talk on video calls then might be some buffer but still the video call is in real time ,you dont get the previous info.
+
+15)what are the 7 layers in osi model.
+	7) application layer= Human-computer interaction layer, where application can access the network service.
+	6)presentation layer=ensure that data is in a usable format and is where data encryption occurs.
+	5)session layers= maintains connection and is responsible for contolling ports and session. 
+	4)Transpot layer=transmitting data using transmission protocols including TCP and UDP
+	3)network layer=decides which physical path the data will take
+	2)data link layer=define the format of data on the network
+	1)physical layer=manages the relationship between the physical device and the transmission medium, be it wirless or cable.
+	
+16)what is firewall?
+	firewall is a network security device or software to monitor incoming and outgoing traffic based on predefined security rule. it act as a barrier between trusted internal network and untrusted external network.
+
+17)what is ping command?
+	the ping command is used to test network connectivity by sending icmp request to a target host and measuring the response time.
+
+18)what is ifconfig command?
+	ifconfig command display information about network interface on a system, like ip addresses,mac address and network configuration details.
+
+19)what is git and how do we use it in devops?
+	git is a distributed version control system used to track changes in source code during software devlopment. in devops git is used for version control, and to automate code deployments through ci/cd pipelines.
+
+20)explain the workflow of how you push your code from a local machine?
+	first we need to clone the repo using git clone command.git add command to stage changes for commit, git commit create a commit with a descriptive message. then git push origin branch name. this is changes made in local machine is push in remote repo.
+
+21)how do you revert a commit that you made in your repo?
+	git revert it is like a undo option. for that first we need to find out commit id using git log command. once we found id, we can run command git revert commit id and messege
+
+22)what is branch in repo?
+	a branch in a git repo is separate line of development that allow multiple devlopers to work on differnt feature or bug fixex simultanously without affecting the main codebase.
+
+23)what is vpc?
+	vpc stands for virtual private network. vpc is where you define network which is the ip cidr range and then you will deploy your resources like servers and databases or storage in this virtual or isolated network.
+
+24)what is differnce between public subnet and private subnet?
+	public subnet is something that connected to the internet.where as private subnet is not connected to the internet.so people on internet can talk to the public subnet but not to the private. public subnet are typically used for resource that need public access like web servers, and private subnet are used for that resources that should not be directly exposed,like databases. public subnets are connected to the internet gateway where private subnet are connected to the nat gateway.
+
+25) what is differnce between reserved instance and spot instance?
+	reserved instance are used for long-term reservation of computer capacity, offering a significant discount in exchange for a commitment.spot instances are spare capacity instance available at a lower price but can be terminated with short notice.
+	whereas on demand instance are pay for compute capacity by the hour with no long term commitments.
+
+26)what is cloudformation?
+	cloudformation is a service provided by aws that allows you to define and provision aws infrastructure as a code. you can create,update and delete aws resources using template written in json or yml.
+
+27) what is differnce between terraform and ansible and when you use it?
+	terraform is used for infrastructure provisioning and ansible is used for configuration management and automation tool.terraform focuses on describing desired state of infrastructure and ansible defines how to configure servers.ansible uses playbook whereas terraform uses state file to define infrastructure.
+
+28) what is a playbook in ansible?
+	playbook in ansible is a yaml file that define set of task and configuration to be executed on remote servers. it is used for automation and configuration managment.
+
+29)what is state file in terraform?
+
+30) what is terraform remote state backend?
+	terraform remote state backend is a mechanism that allow terraform to store its state information in a centralized location, such as an s3 bucket or remote key-value store.
+
+31) differnce between virtualization and containerization?
+	multiple virtual machine running on a single physical server. and each have their own separte os. its like a having a separate houses with differnt families in a single sociaty.
+where containerization is running isolated application on a shared os. its like a having apartment in a single building, where each apartment is self-containered but share same infrastructure.
+
+32)what problems are docker solved? why compnies are use it?
+	docker solve differnt problems like isolation,security,enviornment management. by packing a application and their dependency into container, ensuring they run reliably across differnt environment and systems while maintaing security and scaliblity.
+
+33)what is cicd?
+	ci is a practice of automatically building and testing code changes frequently, cd is the process deploying code to the production after sucessful ci.
+
+34)explain staging,production and testing enviornment?
+	development and testing enviornment= where developer write the code and test.
+statging enviornment=pre-producation environment for final testing before the live enviornment.
+production=live enviornment to end users
+
+35)explain canary deployment?
+	when we have a new version of application, and you want to new version of application shown to only sum amount of user, and if everything works fine it can be done to all the users.
+
+36)what is the biggest issue you faced during a deployment?
+	the most significant challenge i faced was managing a sudden traffic during a product launch.we had to qucickly scale our application to handle the load, which involved optimizing database queries and adding more server.
+
+37)how do you scale your application?
+	i use auto-scaling group on aws. and use k8s horizontal pod autoscaling to dynamically adjust resources based on traffic pattern and resource utilization.
+
+38)how do you roll back? what is your dister recovery strategy?
+	you can roll back by deploying in the previous version of the application or by using container orchestration tools to revert to the last stable state. or we can use blue green deployment strategy or load balancer as well.
+
+ what will happen when liveness probe fails, readiness probe fails
+ what will happen if there are two selecter with same name in same namespace
+ what is current k8s version on which u r working
+ how many workers are in production within cluster
+ which one is better self manageed cluster or eks managed
+	
+
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
