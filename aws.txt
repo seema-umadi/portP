@@ -1,0 +1,298 @@
+1)What is IAM?
+	IAM is identity access manage service provided by aws. to help secure control access to the aws resources. in this we can define who and what amount of permission need to assign. there are 4 main componants of IAM service. i.e user,grup,role and policy. we can create a user and give them a permission to perform actions on aws resources. other part is group , here we can add users to the group, we assign policy to the group and not the user, but existing users in group inherite the policy automatically. if new user is added to the group that user can also inherite the policy. another componant is role. role is set of permission, that give access to the aws resources. roles are attached to the resources and not the user. where policy is also set of permission but policy is attched to the group and user. to perform action. there are two type of policy one is aws managed and other is custom policy which we create. there is also one policy called inline policy. this policy is created with user and associated with a one specific user. other user can not use this policy. if user got deleted then policy is also deleted with that specific user.
+
+2)Authentication and authorization.
+	Authetication is the process where verify who the user is while authorization is the process where define what access they have.
+
+3)what is fedrated identity?
+	with fedrated identity authorized person can access multiple application with single credential. fedrated identity store credential in multiple data centers, so it links with other identity center.
+
+4)what is encryption?
+	encryption means converting human readable data into secreate text. to avoid data leak and exposing actual meaning of data. there are three type of encryption. symmetric,asymetric nd hybrid. in symetric encryption we use single key for encryption and decryption. in asymetric we use 2 key one for encryption and other is for decryption.  
+
+5)what is connection draing?
+	connection draining is feature where we handle the termination of instance in auto scaling or when using load balancer. it ensure the active connection to the instance are not abrutly terminated which helps maintaing the avaliblity and responsivness of application during scaling events or instance termination.we can use connection draining with elb. elb allow you to configure a time period during which the load balancer will stop sending new request to instances that are being terminated. 
+
+ 
+	
+********************************************************************************************************************************************************************************************
+1)what is cloud computing?
+	cloud computing is a delivery of on-demand IT resources over the internet with pay as you go pricing.you dont need to manage or maintain own data centers. you can access technology services such as networking,compute,storage and databases from cloud providers such as aws,gcp,azure and may more.
+cloud computing models
+IAAS= IAAS stand for infrastructure as a service, where it is like basic building block. this provide on demand IT resources like storage,databases ,networking etc.
+PaaS=PAAS stand for platform as a service, where this provide a complete cloud environment for developer to build, manage and run the application from server to operating system to all storage, networking etc.
+SAAS= SAAS stand for software as a service. where they provide software as a product. here you dont warry about maintaing and managing service you just need to know how to use software. 
+
+2)what is ec2?
+	ec2 stand for elastic compute cloud. this service is provided by aws. this web service provides security and resizable compute capacity. it is a elastic in nature which means we can scale up or down its compute capacity. we can deploy our application on ec2 instance. to launch instance we need to define some configuration such as name of instance and AMI amazon machine image which is a image of os like ubuntu,amazon linux or centos etc. after that we need to define instance type, which means we select instance type according to which type is giving us which amount of memory , cpu or other componant. here we also provide a key to ssh instance using this key. key pair is in public and private pair formate. aws keep private with them and provide us a piblic key. after key we need to define networking layer in which we specify vpc,subnets and ports which need to open while launching instance. also we define storage volume and other additional configuration. this is how we launch a instance.
+
+3)What is an EC2 instance family, and when would you use one family over another?
+	there are 4 family dedicated host,on demand, spot instance, reserved instance.
+reserved instance=reserved instance is way to make reservation of compute capacity or like a contract with amzone. it is for 1 to 3 yrs long. because of long commitment aws gives a high discount like 75 or 80 % off compared to on-demand instance.it is used when your application is going to run for long time, and aplication is in steady condition.
+on-demand= it is a on demand compute with no commitments, aws charge for compute storage by hour or second basis. linux instance are second basis pricing, and windows instance are hourly basis. you can use this instance family when you are not sure about instance type, application is not steady and you are not aware of the traffic. also it can be used when application have been developed or tested on ec2 instance 1st time.
+spot instance=spot instance is like a spare capacity, at lower price because instance can be terminated with short notice. we can use this for flexible and fault-tolerant workloads, and enable to handle intrupption workload.
+dedicated host=are ec2 instance that run on hardware that is dedicated to single customer.these instances are islated from oher instances and are dedicated to runing your workloads, providing you with incresed security and performance compared to other ec2 instance type. 
+
+
+4)  What is an EC2 user data script, and how can it be used during instance launch?
+	user data script is predefined script where we write set of commands which we want to excute on our instance, during instance launch. in additional configuration we provide user data. it is started with #!/bin/bash then commands like apt update, apt install nginx , ls like these commands.
+
+5)  Explain the purpose of EC2 instance metadata and how you can access it from within an instance.
+	ec2 metadata provide grand information about ec2 instance. like hostname, networking, mac address.
+
+6)  What are security groups, and how do they control inbound and outbound traffic to EC2 instances?
+	security groups are firewall to the instance. it handles inbound and outbound traffic. it allow the traffic from the internet. it is attached at instance level. we need to open port in security group like protocol,port,source and destination we provide in security group. by defaoult all traffic are allowed to instance. security groups are stateful.which means if you send request from instance 
+
+7)  Explain the use of Network Access Control Lists (NACLs) and how they differ from security groups.
+	nacl stands network access control list, nacl are attached at subnet level whereas security groups are attached at instance level. we can attach multiple subnet to the single nacl but a subnet can have single nacl associtaed with them. nacl are optional security layer. which provide deny option as well where security group has not deny option. nacl is specialy used in case such as if any hacker tries to send 100 of request at a one time to increase the load of trying to hack the appliation and if we notice certain ip address are sending 100 of request at a single time then we can block that certain ip address. by default all traffic are blocked and in security group by deafult all traffic are allowed.nacl works on pripority bases. 20 rules are allowed per nacl.     
+
+8) ec2 instance store
+	also known as ec2 instance backed-storage.it is a temparory storage option.it provide non-persistent storage means the stored volume is lost when instance is stopped or terminated.
+
+
+9)ec2 auto recovery?
+	it is a feature provided by ec2, that automatically recover instance that have failed due to hardware issue.this feature automatically replace failed instance with healthy instance.to minimise imapct of hardware failure. 
+
+instance type= there are 5 types of instance such as general purpose, compute optimised, memory optimised,storage optimised, accelrated. 
+-in general purpose instance type provides a balance of memory,compute and networking. this type is used for application that use this resource in equal proportion like web servers and code repository. 
+-compute optimised instance are ideal for compute bound application that benefit from high performance processer, dedicated to high performance web server, gaming server and machine learning infrence
+-memory optimised instance are deliver fast performance for workload, process on large data set.
+-storage optimised instance designed for workload that require high,sequencial read and write access to large data set located on local storage.
+-Accelerated optimised instance use hardware accelerated, or co-processor that process functioning on floting numbers calculation, graphics, data pattern matching.
+
+
+what is EBS?
+	EBS is elastic block storage. provided by aws. you can create volume storage and attach to the ec2 instance. once you attached you can create file system on it and run databases or can do other things. EBS is for that data which needs to persist. when you create ebs its created on multiple availiblity zone to avoid data loss. ebs also provide a feature that is snapshot. we can take snapshot of the data snapshot is nothing but the backup. we can use ebs as a primary data as well. also we can mount it to the other ec2 instance. encrypted ebs is also we can create. when we create encrypted ebs aws create automatically kem key. u can also create your own custom kem key.it is more flexible. ebs has a multiple type of volume like ssd,hdd and magnetic. ssd is solid state disk usually use for trasactional workload also for development and testing enviornment.its is bootable volume, and its size is 4gb to 16tb.
+hdd is hard disk drive, used for large amout of data such as data warehouse. and its not bootable volume. size is 125gb to 16 tb. magnetic is traditional type of volume using for small scale projects nd data. size is 1gb to 1tb.
+
+
+Auto-scaling group= ASG is monitoring application and automatically adjust the capacity to maintain steady performance at low possible cost. we can scale up or down the resource according to cpu utilization. for creating ASG we need to configure a template.  and then on ASG console we create ASG in that we assign ASG name and preconfigured template. select vpc and subnets . after that group size and scaling policy. we define desired,minimum and maximum instance number. scaling policy depend on cpu utilization and set up warmup time.and this is how we create ASg.
+
+
+Load-balancer= laod balncer is used to manage traffic and distribute to the servers eqully. there are 4 types of load balncer classic, application,network and gateway. classic is old type of load balancer we are not use them currently. application load balncer run on 7th layer i.e application layer and network load balncer is run on 4th layer i.e transport layer.
+
+Appliation load balancer= is work on 7th layer i.e on application layer on osi model. it routes traffic between target instances. to create application laod balancer first we need to create a target group. to create target group select the target type that can be instance,ip address,lambda, application load balancer. we need to select target type and name the target group after need to register targets such as instances. after creating a target group, we create application laod balancer. first need assign a meaningful name , the select schema like internet facing or internal. then select ip address type. then assign vpc and subnets. in listener and routing specify port and protocol to listen on that. there is atleast one listener need to be present to routing traffic.then we select target group. and create application laod balancer.
+
+network load balancer= work on 4th layer i.e transport layer on osi model. routing traffic within vpc using single stable ip address. network load balancer optimised to handle sudden and volatile traffic pattern using single ip address per avaliblity zone.to configure network load balancer first we need to create target. in targeting group there are multiple target type such as instance, ip address, lambda function,application load balancer. we need to select one type, then specify meaningful name. and then register a targets. this is how we create a target group after in nlb console we specify name of nlb, schema like we want this nlb is internet facing or internal, then ip address type like ipv4 or ipv6,then we select select vpc and subnet. under port and listener we need to assign atleast one listener to route traffic. then we assign one elastic ip address and target group which we created. this how nlb is created.
+
+What are the different types of AWS Placement Groups, and how do they differ?
+	there are 3 placement group. cluster, spread, partition.
+cluster placement group= allow you to place instance within a single az. it is designed for application which need low latency and network switch. aws tries to place instance as close together within a rack. but if rack fails then instance are also fails thats why it is not sutaible for crucial application. it does not support for reserved instance. name must be uniqe within a aws account or az.use cases for cluster placement group high computing availibilty. content delivry network, high performance web application.
+spread placement group= allow you to place instance on distinct hardware. it is placed in different az. use cases for spread placement group are high availibity application, name must be unique within aws account. does not support dedicated instance.
+ 	
+how an ec2 instance can fetch something from internet
+	1)your ec2 instance has a public or elastic ip. this allow communication with internet. 2) configure security group associated with instance, ensure outbound rules are allowing neccesary ports like http or https. 3) ensure ec2 is launched in a vpc with internet gateway. the subnet in which ec2 instance is residing should be public subnet and associated with internet gatewy.4) if your instance is in private subnet then you can ue nat gatewat or instance in public subnet. private subnet should have route to nat gateway or nat instance which in turn route to internet gateway. 5) on the instance, you can use tools or programming launguge to fetch the data from internet, tool like curl,wget and many other.
+
+what is green-blue deployment?
+	blue-green deployment is creating two seprate enviornment but identical. one environment i.e blue is running current version of application. other environment i.e green running on a new version of application. 
+
+I have a private instance can i connect to the instance?
+	yes, one method is connect to private instance is, first connect public instance then upload the key of private instance then run ssh command using that key, eg ssh -i key name machine name like ubuntu or ec2user@ip address of private instance.
+another method is using ssm , using ssm we dont need key or ssh port open. ssm agent is need to be installed on instance. aws's AMI images have preinstalled ssm agents by default. we need to create iam role for ec2 instance and attach the amazonSSMManageinstancecore policy. attach this policy to your ec2 instance, this policy will allow ec2 instance, you can login to ec2 instance on browser itself. without requiring key and ssh port enabled. ssm provide extra security.
+
+how do you troubleshoot instance when you can not ssh into the instance?
+	first need to check logs. on ec2 console there is a option in action called logs. using this option we can check where is the actual issue. then ebs of that volume we attach to the differnce instance and ssh into that instance and solve the problem.
+
+difference between snapshot and AMI?
+	snapshot is used to take backup of ebs volume whereas Ami is backup of complete ec2 instance including ebs volume.
+
+What is Amazon EC2 Container Service (ECS), and how does it help with containerized applications on EC2 instances?
+	ecs container orchestrton platform which is used to run and manage container application. using ecs we can deploy, manage and maintain the containeised application. ecs define a task defination which define application is a set of container. each task defination defines docker iamge, cpu and memory requirement, environment variable. ecs manage instances and create a group of instances and register to the cluster. manage deployment,scaling and monitoring health of instance. ecs can integarte with auto-scaling to scale the instances and also can integrate with elb to distribute the traffic. and using cloudwatch monitor the availibilty and performance of application. also can use vpc within aws acc to ensure networking security.
+
+  How can you configure Amazon Route 53 for DNS-based load balancing of EC2 instances?
+	launch two or more instances and host your application or service. setup alb to distribute the traffic. for that first need to register instances in target group. then set up alb. specify basic settings like name of alb, schema is it internet facing or internal, ip address type ipv4,ipv6. configure vpc and subnet, security group and add listener like http or https. attach target group and create alb. then in route 53 create hosted zone. with your domain name. cretae recrd with Atype choose alias with alb, in elb list select your created alb. with simple routing poliy. then create record. then configure helath check and use cloudwatch for monitoring application steady condition or performance. this how you can configure dns based load balancng.
+
+What is the difference between an Availability Zone and a Placement Group?
+	az is an isolated location within a region which is physically seprated from othe azs within same region. az provide high availibilty and fault tolrance from isolating failure if one az experience issue , other az's in same region are unaffected. deloying resources on multiple az can helps ensure that application remains available even if one az is fails.
+	placement groups are logical grouping of instance that are placed in same az. placement group usually use for high network performance and low-latency, high throughput connection between instances. there are three types of placement group. cluster=aws allow to place instances in same az. that ensure that instances are colse together as much as possible in a rack. usally cluster is used to high network performance, low latency application. partition=aws allow to place instances in different partition. sutaible for large distributed and replicated workload. spread=aws allow to place instances on distinct hardware to reduce the risk of simultaneous failuer. suitable for application with small number of critical instances. if you need high network performace and low latency u can use cluster. partition and spread provide lsolation for critical workload.  
+
+What are some best practices for using Placement Groups in AWS?
+	cluster placement group place instnaces in same az. it place the instnace close together as possible in same rack. mostly used with requirment of low-latency, high throughput network performance. high compute performance. remeber this group use single az for application so plan accordily.use homogenus instance type, using differnt type of instances can lead uneven performance.use capacity reservation to ensure you can launch number of instance according to the requirment. partition placement group place instnaces on differnt partition and these partion are isolated from each partion. sutaible for large distributed and replicated workload. spread placement group place the instances on distinct hardware to reduce the risk of simultaneous failure. suitable for small number of critical instances. like small scale critical database. best practices using placement group are , plan coreect group for ur application in intial design phase. test the application or instance performance , they are compatibal with that placement group or not. setup monitoring tools such as cloudwatch or other tools to verify the health and performace of instances. remeber the aws service limit with spread group you allow to run maximum 7 instnace per az. specify placement group when you are launching instance to ensure the instances are placeed in correct placement group type.
+
+Explain the limitations or constraints of AWS Placement Groups?
+	with clster placement group there is a chance of unavabilty of application due to using sigle az. if that zone experience issue then it is affect all the instance. you need to use homogeneus instance type. using different instance type in same group can lead uneven performance. instance are closely placed that can be use for network perforamnce but also corelate failure. with partition group there is a limit for number of partition you can create within az. and configured and management carefuly to ensure instances are evenly distributes on partition. with spread group there is a limit that maximum 7 running instances are allowed per az. moving existing instance to the placement group ar changing the group can be a complex you need to stop and restart the instance which face application downtime . 
+
+What is Amazon Elastic Block Store (EBS), and how does it differ from Amazon S3?
+	ebs is elastic block storage, it is a additional storage volume that can be attached to ec2 instance. it is sililar as physical hard-drive of physical server. data on ebs volume is remains intact even if associated ec2 instance isstopped or terminated. ebs provide a feature called snapshot, it is used for backup, you can backed up data by taking snapshot. snapshot is incremental which means it is only made changes since last snapshot are stored. where as s3 is object storage
+
+ How do you resize an EBS volume, and what precautions should be taken when doing so?
+	to resize ebs volume we need to go on ec2 console and navigate ebs, selecting ebs to resize, action then click on modity volume. provide the incresing size as per your requirement and volume type limit. remember we can increaze the size but decreaing size does not support in ebs. we need to take backup first before doing resizing of ebs volume incase if any issue encounter after resizing. after resize the ebs instance can face temporliy performance issue for that we need to continouly monitor the instance. during resizing we need to make sure instance is an stable state, and no crtical operation are running on instance.
+
+ What is an EBS snapshot, and why is it important for data durability and disaster recovery?
+	ebs is elastic block stroage volume it is like a physical hardware to physical server. ebs provide feature called snapshot. it is used for backup purpose. it takes snapshot means backup of ebs volume and can be store in s3 bucket. snapshot is incemental means only changes made since last snapshot is taken. it is important for durabilty and disater recovery. if any reson instance get terminated, but still we have backup data.   
+
+What are the best practices for encrypting EBS volumes at rest, and how do you implement encryption?
+	need to configure account and automate the encryption for newly created ebs volume and snapshot. you can use encryption using key like aws managed sse-ebs key to encrypt the data and also you can use cutermer managed key like sse-kms key. this key provide more control over key like key policies, key rotation. after specific time period key is goining to changed. for security purpose. to automate the encryption go to ec2 dashbord navigate to account attribute then select ebs encrttion and enale the automatic encryption. also when we are creating ebs there is check box for encryption enable, and key option is also availble. if you not specify key by default aws use aws-managed key. this how we impliment encryption.
+
+  Describe the difference between EBS-backed and instance-store-backed EC2 instances and their respective advantages and limitations.
+	ebs-backed can be a root volume device. we can create ebs for more storage and attach to the ec2 instance. once attached we can create file system on it, run databases and many more. we can resize the ebs bt increasing volume size according to the volume type.ebs provide snapshot which takes back up of data and store in s3 bucket. using snapshot we can create new ebs volume. and encryption is also provided to secure data. where as instance store backend use emphimeral storage.which is physicaly attached to the ec2 instance. but there is no options like encryption, snapshot, no-persistent.
+
+  When would you choose an Application Load Balancer (ALB) over a Network Load Balancer (NLB), and vice versa?
+	application load balancer work on 7th layer of osi model. use alb when your application primarliy handle the traffic of http or https. it is optimised for web application and offers ssl termination, web application firewall integration. provide advance routing such as path based and host based. it allow to direct traffic based on url path which help microservices architecture which use multiple services hosted on single alb. alb provide cloudwatch matrix and loging for http or https request. while nlb work on 4th layer of osi model. use nlb when your application need to handle tcp,udp and tsl traffic. it is optimised for large number of connection with low latency and sutable for real-time application. use nlb if application require high avalibilty performance and potencily handle millions request per seconds. and also when you need static ip address for your application.    
+
+  What is a target group in the context of ALB, and how is it used for routing traffic to instances?
+	target group is a logical group of targets like ec2 instance,ip address, or aws lamda function. we need to register target in target group to route the trafic to targate which include in target group. alb perform helth check on target group. if taget found healthy then only traffic routed to that target. alb has one or more listener. each configured to verify connection to the target. auto-scaling can be done if target continuly failing then auto-scaling add more instances to alb. 	
+
+How to changes instance types for running application without downtime of application?
+	first need to identify which instance type we need for our application. ensure that ec2 instance type is compatible for your applicatio. then launch instance using that instnace type with same ami of previous instance with same configuration and user data. u can use auto-scaling as well. if application is behind load balancer then add new launched instance to load balancer and u can use wighted roting to distribue traffic to new launched instance. monitor aplication and elb to ensure distribution of traffic. and check request and response to the application. if application run smoothly then route traffic to the new instance and remove old instance. ensure you have backup before destoying instance.
+	
+Explain the primary components of AWS Auto Scaling.
+	there are multiple componate like scaling planing, you need to define rules and condition, policy can trigger based on cpu utilization, request count and custom cloudwatch metric. another componat is auto-scaling group which contain many objects like lauch configuration is contain information needed to launch a new ec2 instance.such as intance type, ami, security group, key pair and block device mapping. another is launch template it is similar to launch configuration but provide more feature like versioning and parametrised instance configuration. desired capacity is the number of instance shold asg maintain. min and max size is the minimum or maximum instance can be launched during scale up and scale down peocess. also another componat is scaling activity, activity history allow us to see scaling activity and the status of instance. we can perform helath check on asg to see helathy and unhealthy instance. we intergate asg with elb to perform helath check and replace unhealthy instance and ensure that traffic are evenly distributed on each instance.
+
+ What is the difference between horizontal and vertical scaling, and how does Auto Scaling facilitate horizontal scaling?
+	horizontal scaling involves adding more instances to the resource to handle load distribution. instead of upgrading the existing machine.in auto-scaling plicy we define the rule and condition, policy need to be triggers based on such cpu utlization, request count or custom cloudwatch matrix. perform heath check to verify instance are healthy and remove unhealthy instance. intefation with elb to perform elb health check and evenly distribute  traffic to all instnaces.advantage from horizontal scaling is incresed fault tolerance and redundency. easy to scale in and out. easily distribute traffic,typically involves less downtime compared to vertical scaling. where as vertical scaling is upgrade the resource such as cpu,memory, storage. for vertical scaling we need to change instance type for eg if instance is t2 micro then we can change it into m5.large. for maximum storage and cpu.
+
+What is difference between Launch Template and Launch configuration?
+	launch configuration contain information that need to launch a new instance such as instance type, ami, security group, key pair, bock device maping. launch configuration is similar to lauch template but does not provide felxible settings.once you create launch configuration you can not make changes to the configuration. to modity you need to create new launch configuraton.it is mostly used for simple deployments.where as launch template is predefined template to create ec2 instance. it provide flexible way to launch instance like it provide feature called versioning.you can create multiple version of template. other parametrised instance configuration is present. like metadata option, network interface setting, placement group, capacity reservation.we can use launch template for complex deployment where instance need flexibile setting.
+
+Explain how scaling policies work in Auto Scaling. What are the different types of scaling policies?
+	auto-scaling monitor the intsance and automatically adjust the capacity by adding more instance or removing instance to mainatin stedy condition for appliction. and this is happen because of scaling policy, we need to define rule and condition to scaling policy and policy works according to this. there are 3 main policy 1)target trekking scaling policy, step scaling, and simple scaling. target trekking work as suppose cpu utilization of instance exceed 50% then asg need to add more instances to down the cpu utilization of instance. step scaling works as step , suppose cpu utilizaton goes upto 70% add 2 instances, if goes upto 90% then add 4 instance, conversly if cpu utilization drop 30% then 1 instance will be removed. 3rd type is simple policy it works as simple suppose if cpu utilization exceed 75% then it add one instance. if drop by 25% then remove one instance. this is how they work. to impliment policy we need to define matrix, set threshold, configure actions, monitor and adjust.
+
+How do you configure triggers and alarms for Auto Scaling policies using Amazon CloudWatch? 
+	we need to set alarm, for that go to cloudwatch dashboard you can see the option called alarm create alarm, select matrix for ec2 then ec2 persistence and then cpu utilization. then set the codition like avrage cpu utilization, threshold condition operater like greter than, equal to or less than. and create alaram. to integaret with auto-scaling go to ec2 dash bord there is option called auto-scaling group, click on create policy you can types of policy you can select simple policy add secify the predefind cloudwatch alram. create policy.
+
+What are the best practices for setting up Auto Scaling for stateful and stateless applications?      
+	for stateless aplication we need to set load balancer. elb ensure the load is evenly distribute the traffic across all instances. and auto-scaling policies such as traget tracking scaling policy and step scaling. target tracking policy is based on matrix like cpu utilization, request count etc. and step policy is used to handle sudden trafic it is removed or added instance step wise according to taffic. we need to store data or state information in external services like s3,dynamodb, rds etc. for instance configuration we use launch configuration or lanch template. launch template has more feature and flexibilty compared to launch configuration. set up appropiate cooldown time to prevent rapid scaling action which can lead cost and instability. for stateful application, we can use sticky session to ensure the clients request is directed to the same instance, use external aws services to store state info such as rds, dynamodb. setup database replication to ensure data consistency on multiple instances. use rds multi-az deployment for high availibity. also automate provisioning using clodformation and terraform tool, and for configuration management use aws system manager or ansible. setup longer cooldown time to stateful application to ensure state is correctly replicated and synchronised before further scaling action.
+
+Explain how you would handle Auto Scaling for applications with varying workloads throughout the day (e.g., a news website with peak traffic times).
+	analyse traffic pattern. collect and analyse historical data to identify peak or off-peak period, anaysly typical daily,weekly and monthly traffic pattern. setup policies multiple type of policy are present like target tracking scailng policy which scale the instance based on cpu utilization, request count. main 50%cpu utilzation.  if we setup step scaling it scale the instance stepwise suppose if cpu utilization goes up to 70% 2 instance add if it is goes upto 90% then add 4 instance, also another schedule scaling policy we can schedule auto-scaling for specified time like if on daily bases application face major traffic duriug 8am to 10 am then we can set predefine schdule policy. use elastic load balancer, to evenly distribute traffic across all instance aslo perform health checks and replace unhealthy instance.  
+
+What strategies can you use to minimize costs while using Auto Scaling effectively?
+	right instance type, use smaller instance type for less critical and smaller task. ue large instance type for critical and high availibity reqirement. use mix instance type and corrcet puchasing option. like spot instance for fault tolerance and felixiblity, reserverd instance for predictable traffic which provide more discount compared to on-demand. use on-demand when traffic is unpredicatble. use correct scaling policy.
+
+ How can you troubleshoot issues related to Auto Scaling, such as instances not launching or scaling events not triggering as expected?
+	if instance is not launching then verify launch template or launch configuration are associated with asg correctly configured like ami id, security group,key pair, instance type. check you havent reached instance limit for region or account. you can increase limit through aws service quotas. verify instance type which is present in launch template or launch configration is availble in your az. if scaling event not triggering then check scaling policy ensure you setup threshold and action properly. check cooldown time is too long, because of that also it takes lot of time to trigger. another reason can be security group allowing required traffic into instance. instance need internet access verify nat-gateway or internet gateway are attched. check scaling activity history. cloudwatch matrix and verify setup alram correctly. 
+********************************************************************************************************************************************************************************************what is vpc and whats the componats of vpc?
+	vpc stand for virtual private cloud service provided by aws. it is a private networking space within cloud to lauch aws resources. we launch ec2 on vpc, which provides logical isolation from other virtual network. vpc architecture is same as a physical networking componates that would operate in data centers.we can define ip cidr range according to us. vpc has multiple componats like subnets,route table, internet gatwaye,nat gatway, nacl etc.
+1)subnets=subnets is a sub-division of vpc's ip address range. we can create multiple subnets and deploy our application on subnet level. there are two type of subnets, public and private. public subnet is accessable from internet, client can talk directly to the public subnet. and internet gatway is attchd to it. for internet access. public subnets are used for those resources which need public access like web servers. while private subnets not accessable from internet, clients can not talk to private subnet directly, there is no public ip is assigned to it. private subnet can use internet with the help of nat gateway. private is basically for those resources which do need access of internet like databases.
+2)route-table= route table are used to control the traffic between subnets within vpc. and between vpc and internet. each subnet is associated with route table. basically it shows the route to the client request where is the destination of request.when subnets are created automatically route table is also created. we can associate or disassociate the subnet from route table.we can also create custom route table.
+3)internet gateway= internet gateway establish communication between subnet and internet. public subnets are attched to internet gateway. it is situated on vpc to access the internet.
+4)nat-gateway= nat stands for network address translation. it helps the instances which are in private subnet to connect to the internet, without exposing private subets ip address. it handles inbount traffic intital.
+5)nacl= nacl stands for network access control list. it is virtual firewall at subnet level. multiple subnets can associate with nacl, but single subnet is associate with single nacl. nacl give one advance feature compared to security group, it can allow as well as deny the particular ip. denying option is not present in security group. there are 20 rule are allowed in nacl.
+6)vpc peering= is used to establish a communication with another vpc. they can access or share the data within difernt vpc as well.
+7)transit gateway=it is like a central hub where multiple vpc connect. and using that transit gateway they can communicate each other.
+
+what is the architecture of vpc?
+	first we need to create vpc on vpc console. you can see two option only vpc and vpc and more. when you choose vpc and more its automatically architect the comple vpc. if you want to architect vpc according to you , you can select vpc only.give the vpc meaningful name and cidr range. once vpc created. then create subnets , you can create multiple subnets, name the subnet and ip cidr range within vpc.you can create public and private subnet. then need to create intenet gateway , its simple name a internet gateway and attach to the vpc for internet connection. then create route table for public and private subnet. need to route table for public and private. for public route table associate the public subnet and in private route table associate private subnet. add internet gateway in public route table. then create nat gateway in public instance and add to private subnets route table. while creating nat gateway one elastic ip is needed. using this nat gateway private subnet can access the internet and blocking incoming traffic.
+
+what is cidr?
+	cidr stand for classless inter domain routing. it is a method of allocating ip address within cidr. we can simply say ip address range. 
+
+how to do vpc peering?
+	on vpc console, click on peering connection. select a local vpc i.e requester to peer with. it will show us the cidr block associated with local vpc. select another vpc to peer with. here we can select a vpc from same account or another account. we can also select from the same region and from another region as well. provide target vpc id ad click on create vpc peering connection. here we can see the peering connection status is pending Acceptance, we need to accept the request on destination vpc. you can see same staus on acceptr vpc as well. select pending vpc peering connection. select accept request. vpc peering is active on. now we need to set up route table, go to requester route table and provide cidr of accepter vpc and target should be vpc peering. and save. this is same for accepter vpc route table. add cidr of requester vpc and target should be peering connection. 
+
+what is transit gateway how do you setup a transit gateway?
+	  transit gateway is used to establish a communication between multiple vpc on cloud as well as on primises. it is like central hub. to create transit gateway go to vpc console and click on transit gateway, define meaningful name and description and create. then create transit gateway attachment. specify name, provide transit gateway id which we created and in vcp  attachments select dns support, then select a vpc which need to attach. select all subnet of that vpc. and cerate attachment.create attachment for each vpc, then go to public route table add other vpc cidr and add target as tgw. then do this to each vpc that are attched in transit gateway attachments.
+
+  How do you connect a VPC to an on-premises data center, and what are the options available for this connection?
+	there are three options are available like vpn, transit gateway and aws direct connect. vpn is secure and encrypted way to communicate from vpc to on-premise. it is like a tunel over public internate. another is transit gateway is like a central hub, multiple vpc and on-premise network can commuicate with each other. there can be 5000 vpc can be attached to transit gateway.  aws direct connect is a dedicated private connection between on-premise data center and aws services privately, without public internet. it reduce cost for transfering data witin same region. support high bandwidth connection.   
+
+how does a request from the app go to internet
+	application is running on ec2 instance initate the request. request is passed from application into the operting systems network stack. request is packaged into tcp/ip packet and sent out through network interface of the ec2 instance.the outbound request first hit security group associated with ec2. ensure outbout rule allow necessary traffic like http,https. the instance route table consult where is request need to forward. if instance is in public subnet request is forword to internet gateway, internet gateway comminicate with internet. once it leave the packet they travel through internet to destination server.
+
+if you restrict the security group, nacl and nat gateway then how can you connect and fetch something from s3
+	using vpc endpoint we can achive this without using gateways. and without exposing traffic to internet we need to create vpc endponit, in security group and nacl llow https traffic, update route table,attach iam role with required permission. by setting up vpc endpoint you can securly and privately connect vpc to s3.
+
+
+
+
+	
+
+  Explain the purpose of Amazon VPC peering and its use cases.
+
+  What is the significance of route tables in a VPC, and how do you control traffic routing between subnets?
+
+  What are VPC Endpoints, and how do they enhance security and reduce data transfer costs for certain AWS services?
+
+  Explain the use of a Bastion Host (Jump Host) in a VPC for secure remote access to instances.
+
+  What is Direct Connect, and how does it provide dedicated network connectivity between an on-premises data center and an AWS VPC?
+
+  Describe the concept of VPC Flow Logs and their benefits for network monitoring and troubleshooting.
+
+  What is AWS Transit Gateway, and how does it simplify network connectivity and management in complex VPC architectures?
+
+  Explain the use of AWS PrivateLink for securely accessing AWS services over private connections within a VPC.
+
+  What are some best practices for designing VPC architectures that are highly available, fault-tolerant, and scalable?
+
+  Give examples of scenarios where you would use VPC peering, VPC endpoints, or Direct Connect to enhance network connectivity.
+
+  Discuss strategies for managing and optimizing VPC resources, including IP address allocation, subnet sizing, and route table design.
+
+  What are the considerations when setting up VPCs in a multi-region or global configuration for disaster recovery or load balancing?
+
+********************************************************************************************************************************************************************************************
+
+1)what is s3?
+	s3 is a object storage service provided by aws. mainly used for storing files,videos, images etc in a bucket. it is a global service that's why bucket name must be globally uniqe. in devops environment s3 is used for storing application artiffact,backups,logs and source as a deploying code and assets. 
+
+2)Describe the difference between an S3 bucket and an S3 object.
+	bucket is like a container which stores objects like, images, video, application arrtifacts, files, logs and many more. bucket name must be uniqe. for securing data we use buket policy which is attached at bucket level. in which we specify which user has what amout of access and what action can he/she take. and object is actual data which stored in bucket. object can be size up to 5tb. for ensuring availibilty and and prevent from accidenteal deletion or modification we can use object lock feature. for a specific time of peried that object can not be deleted or modified. it is like a write once and read many model.
+
+3)How do you secure data stored in an S3 bucket, and what are the key access control mechanisms in S3?
+	for securing data s3 provide many option. like bucket policy, in which we can define which user has what action or task perform according to his job role. using bucket policy we can restrict data to use unwanted person. second thing is iam policy, which is attached to user,group and role. attaching iam ploicy to user we can specify what action in s3 he/she could do.then object locking feature provided by s3. which protect the data from accidendental deletion or modification. it is write once and read many model. for specific time period we can not modify or delet the object. enabling versioning is also a another way to secure data it store multiple versions of object.new update, overwrite data if happend then new version is created. and each version has uniqe id. encryption is also done on both side like cilent-side encryption and server-side encryption. client side encryption is data will encrypt before it stored in bucket and decrypt when download the data.there are multiple key for server-side encryption. like sse-s3 key which is managed by s3. sse-kms key which aws managed key, provide control over key including key rotation. another is sse-c which is customer provided key, encryption and descryption is done by this key but s3 is not store this key. for client-side encryption client can use encryption library or software devlopment kit for encryption of data.
+
+4)How do you transfer large data into and out of an S3 bucket?  
+ 	using command line interface we can transfer data to s3 like aws s3 cp, aws s3 mv, aws s3 sync command. also we can use services like ftp which is file transfer protol. for every large file, aws supports multi-part upload where data is uploaded in set of part. also we can use transfer accleration that speedup long-distance object transfer to s3 bucket.
+ 
+5)what is versioning?
+	when user enable versioning in s3, it preserve the multiple form of an object, if someone accidently delete the object. then you can restore the objects.every version has a unique id. when make changes in object like, updating, overwrite data can create a new version.
+
+6)what is lifecycle policy in s3? 
+	life cycle policy in s3 offering storage cost optimisation. user can safely handle their data and define rules such that data dynamically transition through various object class and gets deleted once it is no longer needed.lifecycle policy are defined at level of bucket with maximum limit 1000 policies per bucket.in simple terms data is stored for long time in standard storage even when not needed.we need to tranfer this data into cheaper storage. or delete after a span of time. 
+
+7)storage class in s3.
+	standard- this is a default storage type, if we did not specify storage class while uploading object it stored in standard storage. frequently in use data are stored in standard storage, which gives high availibilty and high throughput performance.
+	standard IA- this stands for infrequent access. infrequently used data but need rapid access when needed, this type of data is stored in this class. for 30 days data can be stored in this type. this is also gives high avaliblity and high throughput performance. 
+	one-zone IA- which mean infrequent data can be stored in one availiblity zone. other classes provide more avalibilty zone to store data. thats why is cheaper than other storage class , cost is less than 20% compared to other storage class. if that one avalibilty zone is destroyed in any case, then we can face data loss. data is stored for 30 days.
+	s3 glacier-it is cheapest storge class, it store archive only, data are stored in class for 90 days. you can store any amount of data in low price. 
+
+8)cross-regional replica?
+	cross-regional replica is when we want to replicate data from one regional bucket to another regional bucket. for that we need two buckets in two different region. go to source bucket and select managment tab, you will find replication option then select that option you need to specify target bucket, and main thing is versioning is must be enabled on both bucket. and you need to create iam role for cross-replication and attach to the bucket policy. this is how you can replicate cross-regional replica.
+
+9)  Explain the concept of S3 Lifecycle policies and provide examples of when they might be useful.
+	s3 lifecycle policy is used to transit data from one strorage class to another storage class when data is not frequently in use, in simple term data is stored in standard class even when data is not frequently in use. then we can configure lifecyle policy for transit action in certain period of time data is automatically transit to another class. for that we need to select the bucket and then go to lifecycle tab. here we define name of policy, and transition action like after 60 days from object creation, object is transfered to the standared ia class, then we can also set expiration action in which we define after how much days from object creation, object will be deleted. this is how we can configure lifecycle policy. 
+
+10)  What is S3 Select, and how does it improve data retrieval efficiency?
+	s3 select is a feature provided by aws s3, where you can retrive subset of data from the object. you can filter the data on server-side. using sql expression you can filter data like, row column wise. use cases of s3 select is for data analytics,data tranformation, log analysis. or if you work on large data set and you require specific pices of information. suppose you have large csv file, instead of downloading file you can use s3 select to perform a query for specific row or column. 
+
+11)   What is the Amazon S3 Transfer Acceleration feature, and when might you use it?    
+	se transfer acceleration is a feature provided by aws s3 service. which speed-up the file transfer to or from s3 bucket using clodfronts globally edge location. we can use this feature when we experience high latency issue while transfering data to s3. also when dealing with transfering large data to s3 quikly. to cofigure it in bucket property tab, we just need to enable the transfer acceleration.  
+
+12)  What AWS services can be used for monitoring and logging S3 activities, and how would you set up such monitoring?
+	we can use monitoring and logging tools like cloudwatch and cloud trail. cloud trail capture the api calls made on your account. for s3 logging we can create trail, go to cloud trail service and click on create trail. name the trail and specify the bucket. once trail is created. cloud trail start logging s3 activity. you can see the logs in specified bucket. cloudwatch is used to monitoring the maxtrix.we can enable cloudwatch monitoring, for that we need to go on cloudwatch console, select logs options. ensure cloud trail is configured to send the logs to cloudwatch. in cloudtrail tab enable the cloudwatch and provide or create cloudwatch log, group.     
+
+13)What factors influence the cost of using Amazon S3, and how can you optimize costs while using S3 for your data storage needs?
+	cost is based on storage class. there are multiple storage class like standard storage class which is used for frequently access storage. standard ia which is used to infrequent access storage.one zone ia for infrequent access which store the data in single avilibity zone thats why cost is low, glaciar storage is for long term archival data, retrival time can be minutes to hour this is also a low cost storage. glaciar deep archival is also cheatest storage beacue it take retrival time form 12 hour or more. data transferd to s3 is typically free. but data from s3 to transfer on internet or other region incure additional cost. replicate data into multiple region or account can also incure additional data. charges are applied on number of request to s3. for optimising cast we need to select right storage class. use aws cost explorer or s3 analytics to moinitor the storage. enable lifecycle policies to transfer data automatically to one storage class to another. minimize data tranfers by caching frequently access data or use aws cloudfront for content delivery. use batch operation to reduse request to s3. 
+
+14)How can S3 be integrated with other AWS services, such as EC2, Lambda, or Glacier, to build scalable and efficient applications?
+	 s3 can be integrated with ec2 to store backup of ebs snapshots, also store static content like images, video and stricpt from s3 to intergate on ec2 instance for web application. also store ami snapshot, when we want to launch instance we can retrive from s3. with lambda we can configure s3 to trigger lambda function in response to specific event like object creation, deletion and modification. we can setup workflow like image processing, data transformation. 
+
+
+********************************************************************************************************************************************************************************************
+
+what is cloudwatch
+	cloudwatch is a monitoring tool provided by aws. it monitors aws resourecs ans services. we need to install cloud agent on ec2 instance. it allow to monitor system like cpu utilization, memory usuages, disk space, networking componants etc. we can also monitor logs,metrixs and custom matrixs. custom matrix can provide deep insight for for application. it also provide centralised log, to check issue and solve it immdiately.
+
+waht is alarm in cloudwatch?
+	alarm is a tool to set alerts on aws resources when predefined conditions are match. it also can take action like termination,restart instance etc using auto scaling group. to set alarm on ec2 instance. first we need to launch a template , in that we specify AMI like ubuntu,amazon linux and many more.then we select instance types like how much cpu , memory we want. there are multiple class in that we choose one according to our requirement. then we select key for ssh into the instance. in networking part we select vpc , subnet and security group which ports we want to open. and then ebs volume. we can also write user data like which packages we need etc.. then launch template. then go for auto scaling option, specify the name for auto scaling and select created template. then we need to set desired,minimum and maximum capacity. in target policy we select none option. and enable monitoring alaram. then we set sns notification and create auto-scaling group. and then in cloudwatch console selecting alarm, and select matrix, choose ec2 instance and select on which resource like cpu ,memory, disk space you want to set matrix. then we specify the condition like time for checking, set threshold. and select sns topic.and create. according the condition it can be scale out or scale in, also we can recive notification via email.
+
+ 
+********************************************************************************************************************************************************************************************
+
+  Explain the primary database engines supported by Amazon RDS.
+	there are multiple database engines supported by rds like mysql which is relational database, rds support multiple version of database, it is use to migrate existing application to the cloud. and rds provide feature like automated backup, software patching, replication. another databases like maraidb which is commumity-developed fork of mysql, postgresql is powerful, open source object-realtional database. oracle is widly used commercial database, multiple edition are supported in aws rds, also microsoft sql is also present. which is delevoped by micrsoft.
+
+What are the benefits of using Amazon RDS for database management in AWS?
+	benifits of using rds are automation like rds automatically perform backup. handle database engine software patching, ensure latest feature and security fixes. we can monitor rds database matrix using cloudwatch to ensure the performance and health. rds provide scalaliblity and avaiblity like, it automactically scale up the storage without downtime. you can create read replica for read workloads. rds support multi-AZ deployment, for automatic failure and incresed availibilty. we can encrypt the data using aws-kms key. and also integrete with othe aws services like lambda, s3. 
+
+sudo service jenkins status
+/var/lib/jenkins/secrets/initialAdminPassword
+
+sonar-scanner \
+  -Dsonar.projectKey=Netflix-1 \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://13.49.59.88:9000 \
+  -Dsonar.login=sqp_ea2f67298fd4468de7e024cf385aa461d8b409b6
+ 
