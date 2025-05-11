@@ -1,0 +1,193 @@
+docker QnA
+
+1. what is docker
+	docker is a very popular and powerful open-source containerization platform that is used for building,deploying, and running applications. it enables developers to package application into containers with its dependencies.docker allow you to ship,test and deploy ur application in any environment without worrying about incomaptible regardless of the machines configuration settings. docker can be visualized as a big ship carrying huge boxex of prodcts.
+
+	docker container image is lightweight with executable package of software that include everything needed to run an application like code,runtime,system tool, system library and settings.
+
+2. how containers are different from virtual machines?
+	VM is the entire copy of the operating system while the container will have minimal resources(less memory, less disk space, less usage of CPU) that are required to run a service.Virtualization lets you run multiple operating systems on the same physical server, whereas containerization enables you to deploy multiple applications or microservices on the same operating system without any hardware abstraction.
+
+3. what is docker lifecycle
+	user would create a dockerfile with a set of instructions or commands that defines a docker image. for example which base image to choose? what dependencies should be installed for the application to run. after that you need to build this image using docker build command. it converts your dockerfile to docker image. after that images is created and then user run the image using docker run command to create the container. and after that you can push the docker image in your dockerhub repository if you want.
+
+4. what are docker components?
+	1.Docker Daemon (dockerd): The Docker daemon runs on the host system and manages Docker objects such as images, containers, networks, and volumes. It listens for Docker API requests and performs tasks accordingly.
+2.Docker Client (docker): The Docker client is the primary interface used by users to interact with Docker. Users can issue commands to the Docker daemon through the Docker client, such as building images, creating containers, and managing Docker resources.
+3.Docker Images: Docker images are read-only templates used to create Docker containers. They contain everything needed to run an application, including the code, runtime, libraries, dependencies, and environment variables. Docker images are built from Dockerfiles using the docker build command and can be stored in Docker registries.
+4.Docker Containers: Docker containers are lightweight, portable, and self-sufficient runtime environments that encapsulate an application and its dependencies. Containers are instances of Docker images that can be executed using the Docker Engine.Each container runs in isolation from other containers and the host system, but they can communicate with each other and with the host system through networking.
+5.Docker Registry: Docker registries are repositories for Docker images. They store Docker images that can be shared publicly or privately within an organization. The Docker Hub is a popular public Docker registry, but organizations can also set up their private registries using Docker Registry or other compatible solutions.
+6.Docker Compose: Docker Compose is a tool for defining and running multi-container Docker applications. It allows you to use a YAML file to configure the services, networks, and volumes for your application, making it easier to manage complex Docker setups.
+7.Docker Volumes: Docker volumes are persistent storage mechanisms used to store data generated or used by Docker containers. Volumes can be mounted into containers, allowing data to persist across container restarts and enabling data sharing between containers. /var/lib/docker/volume
+
+
+5. what is difference between docker copy and docker add?
+	docker add can copy the files from a url unlike docker copy which can only copy files from host system into the container.
+
+6. what is difference between CMD and entrypoint?
+	cli arguments using docker run command will override the arguments specified using the cmd instruction.
+	whereas entrypoint instruction in the shell form will override additional arguments provided using cli paraments or even through the cmd command.
+
+7.what are the networking types in docker and what is the default?
+	default networking is bridge. 1.bridge 2. overlay 3.host 4.macvian
+1.bridge=the bridge is default network driver for a container which is used when multiple container communicate with the same docker host.
+2.host= host will be used when user does not require any isolation between host and container
+3.none = this driver will disable entire networking system.hindering any container from connecting with other containers.  
+4.overlay=overlay is networking type where you can connect multiple host. its like a tunnel type networking.
+5.macvlan= this network driver makes a container look like physical driver by assiging mac address and routing traffic between the containers through mac address
+
+8.can you explain how to isolate networking between the containers?
+	Docker provides a networking subsystem that allows you to create custom networks for your containers. By default, Docker containers connect to a bridge network named bridge, but you can create your own custom networks to isolate traffic between specific containers.After creating a custom network, you can attach containers to that network to isolate their networking. Containers connected to the same network can communicate with each other, while containers on different networks cannot.
+
+	
+9.what is multi stage build in docker?
+	With multi-stage builds, you can define multiple build stages within the same Dockerfile. Each stage represents a phase of the build process, and you can copy artifacts or dependencies from one stage to another. This allows you to separate the build environment from the final runtime environment and discard unnecessary build dependencies, resulting in smaller and more efficient images.
+
+
+10. what are distroless image?
+	distroless images contain only your application and its runtime dependencies with a very minimum operating system libraries. they do not contain package managers, shells or any other programs you would expect to find in a standard linux distribution. they are very small and lightweighted images.
+
+11. what is docker volume?
+	docker volume are file system mounted on docker containers to preserve data generated by the running container. the purpose of using docker volume is to persist data outside the container so it can be backed up or shared. there are two types named volume and anonymous volume. named volume have user defined name, and does not mention in docker file. named volume can be used with multiple containers. where as anonymous volume does not have user defined name. this volume can be mentioned in docker image and are good to use if the data is only going to be used by current container only. 
+
+12.you have a docker container running a web server,but you need to update the application code inside it.how would you approach this task?
+	stop the running container using "docker stop", pull the latest version of the docker image with updated code using docker pull,run a new container with updated image, ensure to map valumes and ports using docker run. verify the new container is running correctly.
+
+13.your team is deploying a microservice architrcture using docker containers.how would you orchestrate and manage these containers effectively?
+	I would use k8s for orchestration, i would define deployment configuration via yaml files and use kubectl for managment.
+
+14.trobleshot in contaniner
+	check container logs with docker logs, inspect resources usage and run time stat using docker stat container name, review host system logs and metrics. if needed ssh into the cotainer using docker exec -it container name /bin/bash for dirct troublshooting, review dockerfile and configuration for miscongurations.
+
+15)your team need to share data between multiple docker containers.how would you accomplish this while mainataing isolation between container?
+	i would use docker volume or networks. volume offers persistent storage shared among containers, while netwoks enable secure communication. this setup allows containers to access shared data or communicate without impacting each other.
+
+16) security of docker container
+	regulary update docker image and containers. employ least privilege principles for container permission. scan docker image for vulnerabilities. monitor container activity for security incidents. minimize the number of running processes.
+
+17)You are migrating an existing application to a new host that has Docker installed. How would you transfer and deploy the application using Docker to minimize downtime and ensure a smooth transition?
+	first we need to check docker and docker compose are installed on new host.and ensure you have ssh access and all required permission to perform migration. if not then install it first. write docker file for ech microservice if it is not present. and write docker compose file for multi-container. then you need to take backups of database and persitent data on old host. and then transfer the backups to new host using scp command. on new host restore the backups. and build and start the container and deploy application. verify application services are running correctly. check logs and setup monitoring tool like prometheus and grafana to actively monitor application and server. make dns configuration by changining new host ip address it takes little time so plan accordinly to minimaze downtime of application. if new environment running properly the decommission the old env , before that take backup and snapshot in case rollback is neccesary. or u can also use blue-green deployment strategy and run application on both env parallel , grudually redirect traffic to the new env. setup all security like firewall rule, user permission and access control. setup regular backups for database and important data to avoid data loss.
+
+18)Securing a Docker environment involves implementing best practices across various layers including the container images, host, network, and orchestrator. Here are the key security best practices to safeguard against potential vulnerabilities and threats?
+	to secure docker image, use trusted base image from docker hub or other registry. update regularly docker image, scan the image using tools like trivy or docker scan for checking vulnabilty.use mimimal base image like alphine or distroless. or u can use multi-stage build, in which you can selectivly copy artifacts from one satge to another. leave everything behind which you dont want in final image. this allow use more than one from statement. and becz of the it become much lighter and reduse the size of image. this is all for image. now for securing container, you have to give least privilage to the user. alway run docker container as non-root. set root filesytem to read only. to secure docker host, regularly update docker latest version. use minimal os like core us or ubuntu minimal. isolate container using right networking. for orchestratuin. use role based access control to restrict the access to the resources. use pod security policy and manage secreates using screate to store sensitive data. enable audit logging and monitoring using tools like prometheus and grafana.
+
+Your Docker containerized application is experiencing a memory leak in production. Walk me through the steps you would take to diagnose and address the issue.
+	 
+You have been tasked with implementing a blue-green deployment strategy for a Dockerized application. Explain the steps involved in this process and how it ensures minimal downtime during updates.
+	first we need to setup infrastructure, one labled as blue(current live enviornment )other labled as green(new version env). make sure both have same configuration and resources.
+configure load balancer or reverse proxy to route traffic to one evn to another env.setup ci/cd pipeline for application deployment in greem env. which automate the build,test and deploy. run the testing to ensure new version is running properly.apply monitoring tools on it to monitor all the matrix and logs. conduct internal testing without exposing green env to the end-user. switch the load balancer to route traffic between blue to green. this can ususally done it take minimal or no downtime.if everything goes well, and it become stable then decommission the blue env. before that take backups and snapshot. then decommission the blue env. now the green evn become a blue. and ready for the next deployment life cycle.
+
+ What is the difference between an image and a container in Docker?
+	image is read only template, which created by docker file. docker file contain set of command and dependencies. we use base image of os, working dir, dpendencies which we need to install for our application tu run smoothly. we can expose the port. and the command which need to excute. by saving this we excute command docker build. then image is builded. after we excute command docker run container start. and application is deployed. containers are light weight because of limited dependencies and functionality of application. to secure ccontainer we provide least privilage to the user. and running container as non-root is best practice.  
+	
+how can you reduce the size of docker file?
+	1)use minimal base images like alpine instead of largest base image like ubutu and debian. 2) each run,copy and add commands create a new layer in image, we need to minimize the layers by adding multiple command into single run statement.3)use multi-stage build which allow multiple from statment in single docker file. keeping only the necessary artifacts in final image.4) install required dependencies and packages only ,remove unnessary file and cache files after installing packeges. 5) use .dockeringnore to remove unnesessary files. 6)use specific versions for base image.
+
+what are the security concern you need to take care while wirting docker file?
+	1)use trusted base images 2) run as non-root user 3) minimize image layer 4) use copy command instead of add unless you specially need add command like downloading or fetching files from remote url 5) use .dockerignore to remove unnecessary files.6)scan image for vurnablity. 7)update image regurlay.8)update package and dependencies regular.  
+
+
+
+********************************************************************************************************************************************************************************************
+							---------------------TERRAFORM------------------------------ 
+
+What is terraform?
+	terraform is open source tool to help you automate the provisioning and configuration of infrastructure using differnet cloud platform like aws,gcp and azure. benifit from using  terraform it increases agility which means as i say it is a provision and confiuration tool , so it can speed up the devlopment and deployment cycle. apart from this using terraform is not good when you need to make imdiate changes in infrasture or when you need small and simple infrasture because it consume more time comapred to create manually.
+
+
+********************************************************************************************************************************************************************************************
+how to raise a ticket in jira?
+	on jira software you can see a option create. click on that. here you need to select project. then issue type there are 4 type of issue, task,story,bug and epic. select any type. provide summary and description. provide reporter then set priority you can put any attachments this can include ss of log file where bug detected then assign a ticket to perticular person and create.
+once you raise a ticket it will come in backlog.what is a backlog = a backlog is a collection of user story,request,bugs are everything
+
+there is a project, centralised project called devops and in that project any team members they can come to the devops project and create some tickets in the backlog
+
+devops is a centralise team, there can be 100,1000 tickets. so devops team take help of product owner and scrum master and during an meeting called backlog refinement they will refine all this story and see which is priority 1,priority 2. they will comeup with top 10 ticket and they will assign a top 10 tickets into the sprint 1. 
+out of all story in backlog we will take some story for the next 2 weeks or 3 weeks nd we will define that in next 2 weeks or 3 weeks this is something we are going to deliver. in backlog will see only story, you are not able to see progress.
+in active sprint, you will see what are the story assigned to which user and what is the status like to do, in progress or done. there can be any column for status.
+every team have a scrum master, and scrum master conduct the meeting daily standup. in that daily stand up. there are some key points. what you done yesterday,and what are you going to do today. or any blockers. if it is any blocker, you will say i block with some user story because i dont have a right set up for to do this work. you can put that in blocker. in daily standup we restrict ourself to we cant go beyond 15 min.
+in a matured agile team,scrum master may not join the call at all.
+
+what are story points.
+	story points means complexity of it.in agile methodology you basically take a fibonachi series. and you have no 1,2,3,4,5 ,8 and 13 that's the maximum no. ususally go to. if it is no. 1 that means it is very simple task, if 3 it is normal if 8 it is critical if 13 it is super complex. 
+
+********************************************************************************************************************************************************************************************1)What is Jenkins, and what is its primary purpose in the software development process?
+	jenkins is a open source automation server, jenkins is java based and by default run on 8080 port number. to configure jenkins you need to install java. jenkins is used for automate the continues integaration and continues deployment for software development life cycle. it help you to automate build,test and deploy code. it use tools like maven and gradle to build the code and use sonarqube or other tool for testing.plugins makes jenkins powerful. nd we can add slave node to run the job on that node. according to security purpose it is good to run pipeline on slave node.
+
+2) What are Jenkins pipelines, and why are they important?
+	jenkins pipelines are used to define the process of continues integration and continues deployment. developers can define the build,testing and deployment in the pipeline code based on groovy DSL(domain specific language). pipeline code can be written directly in jenkins web interface or it can be stored in repository. main importance of pipeline is it automate the build,testing and deployment process. and save time to doing same repetative task. you just need to run the pipeline, and you will get visibilty into pipeline where is the actutal issue or it detect previous bug in code.
+
+3)Describe the master-slave architecture in Jenkins and its advantages?
+	the master-slave node architecture in jenkins is designed to manage build and testing across multiple nodes. to improve performance and scalabilty of CI/CD. role of jenkins master are the jenkins ui and configuration,scheduling build jobs,dispatching build job to slave node,monitor the state of slave node,manage user request and interactions. and the roles of slave nodes are runing a build job assigned by master, report the build result back to the master node.jenkins is running on a master node. for that we need to install java and then jenkins, by default jenkins run on port 8080. then start the service and login into the jenkins server. install required or suggested plugins. also launch another instance on that you need to install java,there is no need to install jenkin on it.once you install java. then goto jenkins web interface you will see the option called manage jenkins, after clicking on that there is another option called node. click that and create a new node. for creating new node give the name of node, description, no. of executer that means how many times you want to run your job or pipeline parallay then put remote directory .then give the lable and  hostname of slave and provide ssh-key. that key is need to store in credencial section. and save. you will see node is not active. relaunch the node then you can see ssh connection not found for that you need paste public key in authorized key. then slave nodes are connected to the master nodes. 
+	advantages of master-slave are=scalibliy, distributing job across multiple node,jenkins can handle large number of build simultaneusly. load balancing, to distribute builds to differnt multiple node can balance the load, and ensuring that no single machine become bottleneck, multiple build can run parallel, that save build time. fault tolareance= if slave node node fails master node can redistribute the task to new node.
+
+4)Explain the role of Jenkins plugins and provide examples of popular plugins
+	jenkins plugins are essencial componate to extend the functionality of jenkins. plugin made jenkins powerful. using plugins we can use different tools and platform in ci/cd server. 
+jenkins plugins are very useful to automate the task to reduce manual efforts in software development process.there are multiple popular plugins such as git, used to transfer github data and helps to sechudle your project build and automatically trigger after commit changes. docker plugins, helps to manage docker containers and services, creating,building,running and managing images. sonarqube, helps to analyse code quality. maven integration, support spring boot application and apache maven project.pipeline, used for managing jenkins ci/cd pipeline.   
+	
+5)Explain the concept of "Blue-Green Deployment" and how Jenkins can be used to implement it.
+	blue-green deployment is a there are two separet enviornment but identical. currnt version of application is on blue and new version of application is on green. in jenkins blue environment is current version of application. jenkins deploy or test new version that is green. if everything is perfect then traffic is routed to new version of application.
+
+6) What are the common issues or challenges you might encounter while using Jenkins, and how can you troubleshoot them?
+	jenkins fails to start- check jenkins logs for any error msg, verify requried java version is installed and properly configured., check if there are any port conflicts with other services running on machine.ensure file system has sufficient disk space available. 
+	build failure or job execution problems-review the console output for build failure, verify required plugins an dependency are installed and up to date, check job configuration for any misconfiguration build steps.ensure that jenkins agent and slave has necessary resources and dependencies to execute the job. 
+	connectivity issue with jenkins agents or node- check network connectivity between jenkins master and slave.verify agents are registered  and online in master. ensure the agent security settings such as ssh key are correctly configured. restart jenkins agent or jenkins instance if necessary.
+	plugin-related problems-check plugins are installed and up to date, disable or remove conflicting plugins that may cause compatiblity issue, verify that plugin configuration is correct.review plugin documentation.
+
+1)Explain the key components of Docker's architecture.
+	docker is a containerization platform. there are three main componate. client,host and registry. client is a cli mode where we send a request to docker deamon. and docker deamon is responsible for excute the command like docker build, docker run etc. host consist multiple object like docker deamon, networking,volume,conatainer,image. docker daemon handle all the object which are present in host like....... docker image is build by docker file. image is ligt weight
+  
+Suppose you have an application deployed inside EKS, and your application needs some secrets to run. These secrets are stored in the Secrets Manager service in AWS. How will you provision this so that your application can access those secrets and configurations?
+	1)when we are create secretes or upload secretes like api key,database credencial or any sensitive info in aws secrte manager that application need to run. ensure that access policies are correctly set and allow eks cluster to retrive this credential. 2)create iam role with permission of acess aws screate manager. this role will assumed by pod that are running on eks cluster.define policy granting the persimison of reading secretes from aws secrete manager. 3)use k8s scretes to store crendential. retrive data from secrete manager and store them as  k8s screte you can use kubectl tool or manifest file to store them in scretes.4) mounte the k8s screcte as a volume or expose them as enviorment varibles to your  application pod.    5)update k8s deployment file or pod specification to reference the secrte. then deploy updates deployment or pod specification.6)verify the application pod can access the credential from aws secrete manager via k8s secretes. 
+
+Suppose you have a database that needs to be deployed on Kubernetes, and it needs to be highly available. How would you achieve that?
+	1)first we need to choose database system that supports clustering and replication. we can use relational database like mysql, postgresql or nosql database like mongodb. 2) we need to use statefulset to manage deployment and scale database as needed. statfulset ensure that each pod get unique, stable network identity and persistent storage. 3)ensure each database pod has persistat storage to store data. use supported storage class for dynamic provision or HA. 4) create headless service for network identity of the database pod. 5) configure database to run in HA mode. this may involves cultering, replication. each database has its own configuration for HA. 6) use liveness and readiness probes to ensure the helth of pods. 7) impliment backup and restores strategy to protect data. 8) impliment monitoring and logging solutions for keep track on performance and health of database. 9) plan for disater recovry which involve replica set in other az or regions.
+
+Suppose you have a situation where your database needs to run on a specific node in Kubernetes and be highly available. How would you achieve that?
+	1) use node affinity to ensure the database pods are schedule on specific node. for that we need to lable nodes. 2)if the specific node have taints. add toleration to allow database pods to schedule on those nodes. 3) use statefulset to enure mange the deployment and scale when needed. statefulset ensure that each pod get unique, stable network identity and persistent storge. 4)each database pod need to have persistent storage to store data. impliment dynamic provisiong with storage class that support HA. 5) configure to run database in HA mode, this may involve setting up replication and clustering. each database pod has its own configuration for HA. 6) use headless service for network identity mangement for dababase pod. 7) impliment liveness and readiness probes for ensuring helath of pods. 8) impliment monitoring and logging solution for ensuring the performance of database and health. 9) impliment backup and restote stratigy to protect data. 10) plan for disater recovery which involve replication in differnt az or regions.
+
+4.what is teeraform local
+	1)terraform is open-source for infrastruture as a code. for provisioning infrasture on local machine as well as remote. 2)terraform local is used when there is a single user project, does not require collabration. and used for development and testing purpose. 3)benifets for local terraform are esier to get started without setting up remotely and authentication.full control over the statefile and env. but can not be useful where team collabration is needed. to use terraform local we need to install terraform on local machine and write statefile. then excute command terraform init. for intializing configuration then excute terraform plan and apply, for applying configuration. if the project is large and need to collabrate with multiple team then make transion to remote backend using terrform cloud, aws s3 or other cloud provider storage. remote backend provide better state managment, locking and collabration.
+
+Suppose you have a system with an apex domain abc.com and multiple environments such as dev.abc.com and prod.abc.com. Additionally, there are multiple subdomains for each environment, such as api.dev.abc.com. How would you structure this kind of system in Route 53?
+	we need to create hosted zone for abc.com 2) for every env we create hosted zone like dev.abc.com , prod.abc.com. 3) in hosted zone we need to create records. we add ns to records. and also add sub-domains like api.dev.abc.com, web.dev.abc.com 3) we use record type like A which is for ipv4 ip or AAAA for ipv6 ip, cname, mx,txt this type of record type. we can use alias as well and routing policy like simple eouting polcy for single resource. geo-location for route traffic based on user location. latency based, route traffic based on users low latency. weighted for where we define what amout of request shoud go on which resoure, fail-over like if privary resourse fails then send reuest to the secondary resource. we need to set correct ttl
+
+.Where would you use a Load Balancer and a NodePort in a Kubernetes cluster?
+	loadbalancer and nodeport both are used for exposing service. but for diffrnt purpose and different context. loadbalncer is used to expose service externally using cloud providers loadbalancer. it provide stable ip address to route traffic to the server. we can use this in production env to expose srvice to the internet. incoming traffic are distributed across multiple node and pod thats why provide more scaliblity and  relablity.but it may expensive due cloudproviders laodbalncer. 2) nodeport is used to expose service to the node ip address. it is used in development nd testing env. easy to setup without cloud provider infrastrutue.
+
+What are parameters in Jenkins?
+	parameters are used to pass value into build job during runtime. allow you to customize build process without hardcoding values in script. there are different type of parameter. string parameter-allow you to pass simple string like version number or file path. boolean - allow to select true/false value. choice - provide dropdown list, to choose single option like different env. password-similar as string parameter but hide input string for securly passing sensitive data. credential-allow you to use jenkins credential. file - allow you to upload files.   
+    
+difference between mutable and unmuable object?
+	mutable object can be changed after creating objects, we can modify, add or remove objects.  
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
