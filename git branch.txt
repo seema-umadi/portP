@@ -1,0 +1,116 @@
+git branch
+
+git branch <new branch name>
+
+git branch dev1
+git branch dev2
+
+git checkout dev1
+git branch  in dev1 branch
+
+echo "gjfsh" > dev1_file.txt                                      in dev1 branch
+git add dev1_file.txt
+git status
+git commit -m "gcjghlk"
+
+git checkout main
+
+git merge dev1
+ls 
+git push origin main
+
+git checkout -b (new branch) create and check same time
+
+
+git branch -d dev1 to delete branch
+
+
+how can u marge multiple commits into one commit id?
+
+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
+
+
+chetansomkuwar254@gmail.com
+branching stategy flow diagram and explaination
+note down all git command
+
+
+ansible master create file.txt how it created this file in on premises?
+ansible tower
+
+********************************************************************************************************************************************************************************l
+
+launch 2 ec2 instance with security group allow ssh.(that are nodes) launch another instance with same security group(ansible master). ssh three in mobaxtream. 
+on ansible master  sudo apt-get update
+$ sudo apt install software-properties-common 
+$ sudo add-apt-repository --yes --update ppa:ansible/ansible 
+$ sudo apt-get install ansible –y
+$ ansible --version 
+
+
+ssh-key
+copy id_rsa.pub , on other server machine ssh-key, paste ansible controller key in server machines authorized_key
+
+
+touch inventry
+vim inventry add server machines pvt ip addr -> save
+eg. 10.0.0.11
+    10.3.9.7
+ansible -i inventry all -m "shell" -a "touch devops"---> created a file devops on server machine
+
+vim playbook.yml
+---
+- name: install and start nginx
+  hosts: all
+  become: true
+  tasks: 
+  - name: Install nginx
+    apt: 
+      name: nginx
+      state: present
+    - name: start nginx
+    service: 
+      name: nginx
+      state: started
+save file
+
+ansible-playbook -i inventry playbook.yml
+    
+
+Ansible tower configuration:
+
+change directory---> cd /tmp
+install ansible tower ---> curl -O https://releases.ansible.com/ansible-tower/setup/ansible-tower-setup-3.7.3-1.tar.gz
+unzip file---> tar xvfz /tmp/ansible-tower-setup-3.7.3-1.tar.gz
+change directory ---> cd /tmp/ansible-tower-setup-*/
+edit inventory file ---> vim inventory
+Fill out a couple of variables in the inventory file, fill admin_password and pg_password. Also, fill in the web_server_ssl_cert and web_server_ssl_key fields, and uncomment both, as shown:
+	# Certificate and key to install in nginx for the web UI and API
+	web_server_ssl_cert=/home/ec2-user/cert.pem
+	web_server_ssl_key=/home/ec2-user/key.pem
+
+Run the Ansible Tower setup script---> sudo ./setup.sh
+
+https://tower-0.example.rhnaps.io
+
+____________________________________________________________________________________________________________________________________________________________________________________________
+ansible.cfg
+
+Write a single playbook with global and local varible.
+Write a script for promt variable.
+Write a script for git pull push where commit message will be same.
+
+write a playbook in which package install,start,enable,deployment, uninstall modules are present.
+
+******************************************************************************************************************************************************************************************
+
+			aws 						azure
+		1)ec2						1) virtual machine				
+		2)vpc						2) virtual network
+		3)s3						3) storage account
+		4)cloudwatch					4)
+		5)AMI						5) VM capture
+		6)nacl						6)NSG
+		7)security group 				7)firewall
+		8)user data 					8) custom data
+		9)nat gatway					9)bastion		
