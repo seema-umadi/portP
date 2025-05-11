@@ -1,0 +1,26 @@
+
+
+1) How can u marge multiple commits into one commit id?
+
+	-Find the IDs of the commits you want to merge.Open your Git repository in a terminal or command prompt.Type git rebase -i HEAD~n and hit Enter. 
+	-Replace n with the number of commits you want to merge plus one.A list of commits will appear in a text file.	-Change the word "pick" to "squash" or just "s" in front of ever  	 commit except the first one.Save the file and close it.
+	-You'll be asked to write a new message for the merged commit.
+	-Write your message, save, and close the editor.Git will create a new commit that combines all the changes from the merged commits.
+	
+2) What is git diff?
+	- diff is a command-line utility that allows you to compare two files line by line. It can also compare the contents of directories.
+
+3) How can we drop multiple indexing file in stash?
+	If you want to delete stash 1 to 3,just go to shell and type the following command:
+	for n in {1..3}
+	do
+	git stash drop stash@{1}   
+	done
+	-Deletion of all stashes is done using the 'git stash clear' command. A specific stash can be removed by using the 'git stash drop stash@{0}' command.
+
+4) Branching strategies workflow.
+	- Branches are primarily used as a means for teams to develop features giving them a separate workspace for their code. These branches are usually merged back to a master branch upon 	  completion of work. In this way, features (and any bug and bug fixes) are kept apart from each other allowing you to fix mistakes more easily. 
+	-for that we need to create a seprate branch, once you created a seprate branch for developers. Then existing branch data will copy automatically into new branch, those new branch 	 called as a featured branch.
+	-each task has a seprate branch. After done with the code in feature branch need -> commit -> merge with master. this concept is useful for parallel development.
+
+
