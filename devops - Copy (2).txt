@@ -1,0 +1,152 @@
+Kubernetes is a container orchestration platform. containers are ephemeral(short life) in nature.
+
+There was some problem in docker which is kubernetes solve that.
+1) single host= the nature of docker is scope to single host, because of single host container which are there ,it is impacting each other.
+
+2) Auto healing = auto healing is a behaviour where without user manual intervention container start itself. this feature is not present in docker.
+
+3) auto-scaling = If load is increasing on application docker container does not have auto scaling quality, but kubernetes provide auto scaling.
+
+4) Enterprise support = docker does not support any enterprise level support.
+
+** kubernetes is a cluster (group of nodes)master/work node. In kubernetes you create master and work node, in kubernetes you will not directly send the request to work node but request go through master. i.e control plane
+
+In kubernetes the smallest level of deployment is pod. there is a component called kubelet. kubelet ensure that all pods are running. if the pod is not running kubernetes has a feature like auto-healing. another component is kube-proxy which provides networking. every pod or container that you are creating has to be allocated with ip address and it has to be provided with load balancer capablities.
+
+API server= API is a component that basically expose your kubernetes. kubernetes has to be expose to the external world.
+
+Schedular = schedular is responsible for scheduling your pods or scheduling your resources on kubernetes.api server decide a task and schedular act according to task. 
+  
+etcd= etcd store key:value pairs and entire kubernetes information inside in etcd.
+
+pod is like a wrapper 
+
+
+Questions
+
+1) what is difference between docker and kubernetes?
+	docker is container platform and kubernetes is container orchestration platform. kubernetes is advance tool as in container. kubernetes have features like auto-scaling, auto healing and multiple host. which docker does not have. auto-scaling means if load is increasing on a container then kubernetes have a feature like auto-scaling which automaticaliy increase the containers, this feature is not present in docker. 2nd is auto healing. docker container are emphemerial in nature thats why if any container goes down then application is also goes down. this is major drawback in docker but in kubernetes it have a auto healing quality, if container goes down then kubernetes automatically create another pod. 
+
+ 
+2) what are the main components of kubernetes architecture?
+	kubernetes components in two part.
+	i)control plane (API server, schedular,controller manager,CCM,etcd)
+	ii) Data plane (kubelet,kube-proxy,container runtime)
+
+
+3) what are the main difference between the Docker Swarm and kubernetes?
+	docker swarm is very easy to use but it is suitable for small scale organization, because support is very limited.	
+
+
+4) what is the differnce between docker container and a kubernetes pod?
+	A pod in kubernetes is a runtime specification of a container in docker.A pod provides more declarative way of defining using yaml and you can run more than one container in a pod. 
+
+
+5) what is namespace in kubernetes?
+	multiple projects or multiple user use same cluster using namespace.
+
+6) difference between nodeport and loadbalancer
+	nodeport is service type in kubernetes, when client send request to ip address of node.one or more nodeport value specified in service. on the other hand load balancer is a service type in k8s where client send a request to load balancer ip address.
+
+7) day to day activities on kubernetes?
+	as part the devops engineer we manange kubernetes clusters for our organisation we also ensure application are deployed on kubernetes cluster. we setup monitoring on cluster to see everything goes well. and we also do maintaing part.
+*****************************************************************************************************************************************************************************************
+1) what is the commands to view crontab linux?
+	crontab -l
+
+2) what is alias in linux?
+	in linux alias is user-defined command which is a shortcut or subtitution for long command. syntax alias cron='crontab'
+
+3) what chmod command do?
+	chmod command is used to change the permission of files and directory like read,write,execute.
+
+4) what is ssh port forwording?
+	ssh port forwording is also known as a ssh tunneling, is the process of transmiting the data over an encrypted secure shell connection between a local and distant server.
+
+5)what is zombie process?
+	The process that have completed their execution, but their entries are not removed from the process table.
+
+6) how to check the top cup consuming process?
+
+
+7) what is blue-green deployement?
+	blue-green deployment is deployment strategy , where two separate environments are created but identical. one environment is running current version of application i.e blue. and other environment is running a new version of application i.e green.
+
+********************************************************************************************************************************************************************************************
+what is kubernetes?
+	k8s is a orchestration platform. where applications are running as a container.k8s has a multiple feature which docker does'nt have like auto scaling,auto healing and enterprise level support. we create a clusters and in that cluster we run our application. 
+
+2) what is k8s service what are the type of service?
+	the idea of service is to group a set of pods endpoint into a single resource. you will get a stable ip address, using that stable ip address internal clinet in cluster can communicate with pods in service. every pod has a ip address associate with them. in deployment pods can come and go , and there ip address are changed. so using pods ip directly doesn't make sense.with a service you get a stable ip address that last for life of service. request are balanced across the pods in service.
+type of service:
+1)clusterIp= internal client send a request to stable Ip address.
+2)nodeport= client send a request to ip address of node. one or more nodeport valuees are specified by service
+3)load-balncing=client send a request to ip address of load-balancer.
+4)external= client send a request to dns name of service.
+5)headless= headless is a service where you want group of pods and not the stable ip address.
+
+3) how do you handle k8s cluster security?
+	we have done lot of thing for security of cluster. we have secure secretes. we have secure pod communication using egrees and ingress. we also use Rbac policy. rbac stand for role back access control. which define which user has what amount of access to the resource. for multiple projects and multiple people use same k8s cluster, we have used namespaces to enable multi-tenancy support.audit logging enable to monitor k8s security.
+
+4) you have an application deployed on k8s that is experencing increased traffic,how would you scale the application to handle the increased load?
+	first identify bottleneck, i will check cluster to analyse resource including cpu, memory and networking to determine a limited factor. once i know this, if bottleneck is cpu and memory i would scale application horizontaly, using horinzontal pod autoscaler, if bottleneck i resource specific i would vertically scale the application by upgrading resources allocated to pod. other than this i will scale the nodes using auto scaler.
+	
+5) while troubleshooting a networking issue in the cluster,you noticed kube-proxy in the logs.what is the role of kube-proxy in cluster?
+	kube-proxy is a componant of k8s that run on each node. it handles tcp/udp packets forwording between backend network services.it crucial for communication between pods and service by routing traffic to the right destination.
+
+6)your team is planning a high availablity kubernetes cluster.describe the process and consideration for desiging and high availibity k8s cluster.
+	To creat a cluster on high availabilty we need to deploy multiple nodes and pods in multiple daisis, we need to setting up multi-master nodes. to create this we need to deploy master nodes in three or more daisis to ensure redundancy and fault tolerance. we need to distribute etcd members across differnt availiblity zone as simliar as master node. to ensure data redundancy and zone failure. apart from this we need to configure load balancer such as aws's network load balancer to evenly distribute API request among API server. this setup eliminate the risk of single API server becoming bottleneck and point of failure. along with this we can enable node auto repair feature by k8s engine which automatically detect and replace unhealthy nodes. maintaing the descired cluster size and health without manual intervention.
+  
+7)what happens when the master or the worker node fails?
+	master node is something which handle evrything inside the cluster. if master node is fails then cluster continusly operates but pod managemnet is lost. there is no new pods are being created. on the other hand worker node is something application is running on the worker node. if worker node is failed then obvisouly application running on that node will also fail. you will get dns failure on worker node. but master node is working properly, k8s noticed the worker node is failed then it find out worker node is not ready so that new pod is not going to create on that node. and schedular is removed all pods which are on failed worker node and launch it somewhere else on other node. so this is happens when master node and worker node are failed. 
+
+8)how does ingress help in k8s?
+	ingress is a object in k8s, which is used to expose the service to the external world. ingress expose service using single ip address or dns name. also ingress provides feature like load balncing ssl termination. it simplify the management and configuration of your service.
+
+9) what do you know about headless service?
+	headless service is one of the service type in k8s. where the service type is clusterIp but there is no stable ip associate to the service. so here the spec clusterip set to none, and the spec type is clusterIp.
+
+10)what is init container, why we need?
+	on the pod there are 2 containers are running one is the init container and other is application container. init container is run before the application container. there are multiple use cases for init container including ruuning a script, setting up networking configuration or download confiuration file or anything that need to run before application starts. the purpose of init container is perform initialization task or set up procedure which is not present in application container image. 
+
+11) critical application running on one of the node is not working properly.how do you monitor application in k8s?
+	we can monitor k8s cluster using prometheus and grafana , we can use other different tool as well. also we can run kubectl top and kubectl stat command to monitor k8s cluster. we can create alarting using promethues alrt manager.
+
+12)your manager read an artical on gitops and want you to do POC on it. what is gitops and how do you impliment?
+	gitops is somethig where you need to write a manifest file and pust into the repository. once file is pushed. it automatically detect the changes in repository and perform the task according to the changes automatically without users manual intervention.
+
+13)explain RBAC
+	RBAC stands for role based access control, where we define which user has what amout of access to the resource. it is a main componant to maintain security in cluster. it defines access like deployment,manifest, services. let's assume one user has a access to deployment but he or she does not access pode and nodes.	
+
+14)how do you perform maintainance on the k8s node?
+	to perform maintainance on k8s node, first we need to remove running application on the node. so you first make sure node unschedule which means there is no new pod should running on the node. you can do this using kubectl cardon command and remove existing port using kubectl drain comand.then perform maintaince , optionaly you can reboot node. once this is done make sure pods are deployed on node again. and you can check the status of pod using kubectl get node and kubectl describe command.
+
+15)explain daemonset
+	daemon set is let you run pods on every nodes inside the cluster. they are used on system level task like logging and monitoring nodes.
+
+16)differnce between configmap and secrets?
+	configmap is used to save the application configuration in plaine text. where secrets are used to save secreate credential like databases, username, password in encrypted format.
+
+17)what is purpuse of oprators?
+	operators is the method packing the complex application on k8s cluster. it is used to packing,deplyong and managing k8s application. oprater uses k8s API to automate task such as deployment, scaling, implimenting custom controller. 
+
+18)how can you run a pod on specific node?
+	we can run pod on specific node using node affinity or node selectors. and you can also use node name. label the node using lable.
+
+19)suppose a pod exceed its memory limit. what signal will be sent to the process?
+	if pod exceed its memory limit kernel's out-of-memory killer send a signkill single to pod process, terminating it immediatly. 
+
+20)what will you do to upgrade k8s cluster?
+	k8s come with new upgradation every 4 months. to upgarde cluster we follow offical documentation in which we followed steps like first we need to upgrade master node and then worker node. after the upgradation is need we need to verify cluster is running properly or not.
+
+21) explain the k8s architecture.
+	k8s has main two componant one is control plane which is on master node and other is data plane which is present on worker node. control plane consist API server, schedular, controller manager, etcd, ccm. 
+API server= is used to expose k8s to the external world.
+etcd=is store entire k8s information inside in etcd.
+  
+
+
+         
+
+	
+		 
