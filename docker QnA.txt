@@ -86,10 +86,27 @@ how can you reduce the size of docker file?
 what are the security concern you need to take care while wirting docker file?
 	1)use trusted base images 2) run as non-root user 3) minimize image layer 4) use copy command instead of add unless you specially need add command like downloading or fetching files from remote url 5) use .dockerignore to remove unnecessary files.6)scan image for vurnablity. 7)update image regurlay.8)update package and dependencies regular.  
 
+what expose command do?
+expose container port.
 
+Difference between Docker Volume and Bind Mount?
+Docker volume are managed by docker, bind mount are managed by host system.
+docker volume are secure, portable and stored in var/lib/docker/volumes/
+bind mounts are less secure and stored anywhere on host system.
 
-********************************************************************************************************************************************************************************************
+How to pass environment variables dynamically in Docker?
+For multiple variables we can create env file, and while running container we can pass that file. like docker run --env-file filename imagename
+we can use ARG in docker file like ARG Version, then we can pass the value on cmd. docker build --build-arg version -t imagename
+and also for single variable we can pass -e var=value while excuting command.
+
+******************************************************************************************************************************************************************
 							---------------------TERRAFORM------------------------------ 
+Day-to-day activity
+1.monitoring infrastructure, typically monitor k8s production cluster
+2.writing maintaing IAC
+3. improving jenkins pipeline
+4. collaborate with developers for application release
+5. trobleshoting incidents
 
 What is terraform?
 	terraform is open source tool to help you automate the provisioning and configuration of infrastructure using differnet cloud platform like aws,gcp and azure. benifit from using  terraform it increases agility which means as i say it is a provision and confiuration tool , so it can speed up the devlopment and deployment cycle. apart from this using terraform is not good when you need to make imdiate changes in infrasture or when you need small and simple infrasture because it consume more time comapred to create manually.
