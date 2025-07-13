@@ -203,6 +203,19 @@ how can you deploy in k8s using aws?
 if you are using eks then how can a service in aws talk with another service in aws?
 	there are sevreal methods if the requirement is service to service communication within eks cluster.then we can use service types like clusterip where service is exposed internally to cluster ip, and traffic routed to cluster ip address, using nodeport service, service expose to node's ip address, and traffic routed to nodes ip. loadbalncer provide external ip address to route traffic using this service types we can ensure service to service commumnication with eks cluster, if the requirement is service to service communication across aws service. we can setup vpc peering between eks vpc and the other service vpc. make a vpc peering connection between them configure route table. or we can use endpoint as well which is a secure and private connection between services without exposing to internet.  
 
+Upgrade k8s cluster
+1.backup etcd
+2.drain nodes
+3.check deprecated api 
+4.update kubectl
+5.test in staging
+k8s upgrade from v1.24 to v1.27. first we backedup etcd. verified compatiblity of ingress controller and checked deprecated api. then we drained and upgrade worker node in rolling manner.
+
+what is pod distribution budget?
+1.define minimum avalible pod during voluntry distribution 2.prevent too many pods from going down during drain/updates. we set PDB to minAvaliable:2  to keep atleast 2 pods online even during drain. 
+
+
+
 scrum = update
 shell scripting task = repitative task such as developers environment server we stopped at night time daily, so for that we wrote a script for shutdown and apply cron and  
 wrote a script for whatever email alerts we have set, that need to be count daily and put in single sheet and apply cron. 
