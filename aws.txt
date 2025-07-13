@@ -193,7 +193,8 @@ how does a request from the app go to internet
 if you restrict the security group, nacl and nat gateway then how can you connect and fetch something from s3
 	using vpc endpoint we can achive this without using gateways. and without exposing traffic to internet we need to create vpc endponit, in security group and nacl llow https traffic, update route table,attach iam role with required permission. by setting up vpc endpoint you can securly and privately connect vpc to s3.
 
-
+can nat gateway recieve inbound traffic?
+no, it only handle outbound request from private subnet
 
 
 	
