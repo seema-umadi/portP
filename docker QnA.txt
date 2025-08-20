@@ -111,8 +111,26 @@ Day-to-day activity
 What is terraform?
 	terraform is open source tool to help you automate the provisioning and configuration of infrastructure using differnet cloud platform like aws,gcp and azure. benifit from using  terraform it increases agility which means as i say it is a provision and confiuration tool , so it can speed up the devlopment and deployment cycle. apart from this using terraform is not good when you need to make imdiate changes in infrasture or when you need small and simple infrasture because it consume more time comapred to create manually.
 
+You have defined multiple resources in file like vpc, ec2, s3. but you want to apply only ec2.
+	command = terraform apply -target=aws_instance.my_ec2
 
-********************************************************************************************************************************************************************************************
+what is sensitive data type in terraform?
+	marking value as sensitive that means terraform will hide it from output and logs to protect the passwords,Api's. Sensitive doesn’t encrypt the value; it's still stored in plain text in the state file.You should protect the terraform.tfstate file (e.g., use remote backends with encryption and access control).
+
+how to backup terraform state file?
+	if you are using local state then simply copy the file. we can use remote backend. terraform supports remote backend like s3, azure blob storage that handle automatic backups and state locking.
+terraform{
+  backend "s3"{
+    bucket = " "
+    region = " "
+    key= " "
+}
+}
+
+how to manage secrets in terraform?
+	1. we can use env variable 2. we can use screte manager, azure vault or hashicorp to store screates. we can simply pull these screte in terraform file. 3. mark variable as sensitive, so the terraform hide this to output and logs to protect passwords.
+	
+******************************************************************************************************************************************************************
 how to raise a ticket in jira?
 	on jira software you can see a option create. click on that. here you need to select project. then issue type there are 4 type of issue, task,story,bug and epic. select any type. provide summary and description. provide reporter then set priority you can put any attachments this can include ss of log file where bug detected then assign a ticket to perticular person and create.
 once you raise a ticket it will come in backlog.what is a backlog = a backlog is a collection of user story,request,bugs are everything
@@ -178,6 +196,7 @@ What are parameters in Jenkins?
 difference between mutable and unmuable object?
 	mutable object can be changed after creating objects, we can modify, add or remove objects.  
 	
+
 
 
 
