@@ -129,6 +129,12 @@ terraform{
 
 how to manage secrets in terraform?
 	1. we can use env variable 2. we can use screte manager, azure vault or hashicorp to store screates. we can simply pull these screte in terraform file. 3. mark variable as sensitive, so the terraform hide this to output and logs to protect passwords.
+
+How to refer resources from one terraform file in another when root module are diffrenet?
+1. you can not refer them directly instead of you can use remote state. if they are different module you can use output to refer them.    
+
+what is terraform login used for?
+to login into terraform cloud, it generate api token and save the token. when we want to work with terraform cloud that time we can use this.  
 	
 ******************************************************************************************************************************************************************
 how to raise a ticket in jira?
@@ -196,6 +202,7 @@ What are parameters in Jenkins?
 difference between mutable and unmuable object?
 	mutable object can be changed after creating objects, we can modify, add or remove objects.  
 	
+
 
 
 
