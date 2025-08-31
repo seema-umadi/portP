@@ -99,6 +99,10 @@ For multiple variables we can create env file, and while running container we ca
 we can use ARG in docker file like ARG Version, then we can pass the value on cmd. docker build --build-arg version -t imagename
 and also for single variable we can pass -e var=value while excuting command.
 
+command to create docker container, just create not run?
+docker create --name mycontainer myimage:latest
+docker start mycontainer
+
 ******************************************************************************************************************************************************************
 							---------------------TERRAFORM------------------------------ 
 Day-to-day activity
@@ -202,6 +206,7 @@ What are parameters in Jenkins?
 difference between mutable and unmuable object?
 	mutable object can be changed after creating objects, we can modify, add or remove objects.  
 	
+
 
 
 
