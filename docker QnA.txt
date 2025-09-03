@@ -38,6 +38,8 @@ docker QnA
 
 8.can you explain how to isolate networking between the containers?
 	Docker provides a networking subsystem that allows you to create custom networks for your containers. By default, Docker containers connect to a bridge network named bridge, but you can create your own custom networks to isolate traffic between specific containers.After creating a custom network, you can attach containers to that network to isolate their networking. Containers connected to the same network can communicate with each other, while containers on different networks cannot.
+to create network = docker network create name
+if you want to specify option = docker network create --driver brigde mynetwork
 
 	
 9.what is multi stage build in docker?
@@ -56,6 +58,9 @@ to remove all unused container = docker system prune
 to remove unused image = docker image prune
 removed stopped container only = docker container prune
 remove unused network = docker network prune
+
+command to check last three stopped container
+docker ps -a --filter "status=exited" -n 3
 
 12.you have a docker container running a web server,but you need to update the application code inside it.how would you approach this task?
 	stop the running container using "docker stop", pull the latest version of the docker image with updated code using docker pull,run a new container with updated image, ensure to map valumes and ports using docker run. verify the new container is running correctly.
@@ -213,6 +218,7 @@ What are parameters in Jenkins?
 difference between mutable and unmuable object?
 	mutable object can be changed after creating objects, we can modify, add or remove objects.  
 	
+
 
 
 
