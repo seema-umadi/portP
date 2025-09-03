@@ -296,4 +296,7 @@ sonar-scanner \
   -Dsonar.sources=. \
   -Dsonar.host.url=http://13.49.59.88:9000 \
   -Dsonar.login=sqp_ea2f67298fd4468de7e024cf385aa461d8b409b6
+
+Single sign on for azure and aws. go to aws sso -> choose identity source -> external identity provider-> dowload saml file. in azure -> azure active directory -> azure enterprise application -> new application ->create. then single sign on -> saml -> upload downloaded sample file from aws -> download fedration metadata then upload this file on aws. then provision automatic -> you will get scim endpint and access token. on azure active directory -> provision -> automatic -> past scim token and access token there. -> start provision-> then add user 
  
+
